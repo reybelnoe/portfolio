@@ -24,7 +24,7 @@
     preload.src = newSrc;
   }
 
-  /* ── Hover ── */
+  /* ── Hover (Desktop) ── */
   thumbs.forEach((thumb, i) => {
     thumb.addEventListener('mouseenter', () => { current = i; activate(i); });
   });
@@ -38,6 +38,24 @@
     } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
       e.preventDefault();
       current = Math.max(current - 1, 0);
+      activate(current);
+    }
+  });
+
+  /* ── Touch / Click Navigation (Móvil y Tablet) ── */
+  box.addEventListener('click', function(e) {
+    // Detecta vía hardware si el dispositivo usa puntero táctil
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      const rect = box.getBoundingClientRect();
+      const clickX = e.clientX - rect.left; // Coordenada X del tap
+      
+      if (clickX > rect.width / 2) {
+        // Click en la mitad derecha -> Siguiente
+        current = Math.min(current + 1, thumbs.length - 1);
+      } else {
+        // Click en la mitad izquierda -> Anterior
+        current = Math.max(current - 1, 0);
+      }
       activate(current);
     }
   });

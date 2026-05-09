@@ -331,6 +331,20 @@ nav a:hover { opacity: .4; }
   nav {
     padding: 0 24px;
   }
+
+  /* Alturas dinámicas para centrado perfecto ignorando la UI de Safari/Chrome */
+  .index-gallery {
+    height: 100vh;
+    height: 100dvh;
+  }
+  .obra {
+    height: 100vh;
+    height: 100dvh;
+  }
+  .obra--bleed {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -350,12 +364,39 @@ nav a:hover { opacity: .4; }
   .obra {
     padding: var(--nav-h) 20px 0;
   }
-  .obra__s23 { width: 85vw; }
-  .obra__s23--xs { width: 65vw; }
-  .obra__s23--l { width: 95vw; }
-  .obra__s32 { width: 95vw; }
+  
+  /* Restricciones cruzadas de max-height y max-width para garantizar 
+     que nunca desbordan ni en vertical ni en horizontal (landscape) */
+  .obra__s23 { 
+    width: 85vw; 
+    max-height: calc(100vh - var(--nav-h) - 40px);
+    max-width: calc((100vh - var(--nav-h) - 40px) * 3 / 4);
+    max-height: calc(100dvh - var(--nav-h) - 40px);
+    max-width: calc((100dvh - var(--nav-h) - 40px) * 3 / 4);
+  }
+  .obra__s23--xs { 
+    width: 65vw; 
+    max-height: calc(80vh - var(--nav-h) - 40px);
+    max-width: calc((80vh - var(--nav-h) - 40px) * 3 / 4);
+    max-height: calc(80dvh - var(--nav-h) - 40px);
+    max-width: calc((80dvh - var(--nav-h) - 40px) * 3 / 4);
+  }
+  .obra__s23--l { 
+    width: 95vw; 
+    max-height: calc(100vh - var(--nav-h) - 20px);
+    max-width: calc((100vh - var(--nav-h) - 20px) * 3 / 4);
+    max-height: calc(100dvh - var(--nav-h) - 20px);
+    max-width: calc((100dvh - var(--nav-h) - 20px) * 3 / 4);
+  }
+  .obra__s32 { 
+    width: 95vw; 
+    max-height: calc(100vh - var(--nav-h) - 40px);
+    max-width: calc((100vh - var(--nav-h) - 40px) * 3 / 2);
+    max-height: calc(100dvh - var(--nav-h) - 40px);
+    max-width: calc((100dvh - var(--nav-h) - 40px) * 3 / 2);
+  }
 
-  /* Trio: Transformamos a un scroll horizontal interno para móviles */
+  /* Trio: Scroll horizontal nativo */
   .obra__trio {
     display: flex;
     width: 100vw;
@@ -363,22 +404,28 @@ nav a:hover { opacity: .4; }
     padding: 0 20px;
     gap: 16px;
     scroll-snap-type: x mandatory;
+    align-items: center;
   }
   .obra__trio a {
     flex: 0 0 75vw;
+    max-height: calc(100vh - var(--nav-h) - 40px);
+    max-height: calc(100dvh - var(--nav-h) - 40px);
     scroll-snap-align: center;
   }
 
-  /* Duo: Apilamos verticalmente */
+  /* Duo: Apilado vertical ajustado para no romper el aspecto horizontal */
   .obra__duo {
     flex-direction: column;
     width: 100%;
     gap: 16px;
     justify-content: center;
+    align-items: center;
   }
   .obra__duo a {
     width: 85vw;
     height: auto;
+    max-height: calc((100vh - var(--nav-h) - 40px) / 2);
+    max-height: calc((100dvh - var(--nav-h) - 40px) / 2);
   }
 
   .obra--bleed {
@@ -398,7 +445,8 @@ nav a:hover { opacity: .4; }
   
   .project-featured {
     width: 100%;
-    height: 55vh; 
+    height: 55vh;
+    height: 55dvh;
     margin-bottom: 20px;
     justify-content: center;
   }
@@ -411,39 +459,44 @@ nav a:hover { opacity: .4; }
   .featured-box img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Evita que la imagen se recorte en móvil */
+    object-fit: contain;
   }
 
   .project-spacer {
     display: none;
   }
 
-  /* Thumbs: pasan a ser una fila deslizable en la parte inferior */
+  /* Thumbs: Wrapper flex centrado. 
+     Al ocupar 100% copia milimetricamente los márgenes del featured-box */
   .project-thumbs, .project-thumbs--p03 {
     flex-direction: row;
+    flex-wrap: wrap; 
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: auto;
-    overflow-x: auto;
     padding-bottom: 10px;
     gap: 10px;
   }
   .thumb-row {
     flex-direction: row;
+    justify-content: center;
     gap: 10px;
   }
   .thumb {
     width: auto;
-    height: 80px; /* Altura fija pequeña, el ancho se adapta al ratio */
+    height: 60px;
   }
 
-  /* p03 overrides */
   .thumb-col--land, .thumb-col--port {
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     height: auto;
     width: auto;
   }
   .thumb-col--land .thumb, .thumb-col--port .thumb {
-    height: 80px;
+    height: 60px;
     width: auto;
   }
 
@@ -454,6 +507,7 @@ nav a:hover { opacity: .4; }
     padding: calc(var(--nav-h) + 40px) 20px 40px;
     height: auto;
     min-height: 100vh;
+    min-height: 100dvh;
     justify-content: flex-start;
     gap: 40px;
   }
@@ -467,6 +521,7 @@ nav a:hover { opacity: .4; }
     width: 100%;
     height: auto;
     max-height: 50vh;
+    max-height: 50dvh;
   }
   .about-text {
     order: 2;
