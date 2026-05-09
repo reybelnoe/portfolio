@@ -312,3 +312,169 @@ nav a:hover { opacity: .4; }
   transition: opacity .2s;
 }
 .contact-layout a:hover { opacity: .4; }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE - TABLET (Landscape & Portrait up to 1024px)
+═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  :root {
+    --margin: 60px;
+    --col-w: 8vw;
+  }
+  .obra__trio {
+    gap: 20px;
+  }
+  .project-layout, .about-layout {
+    padding: var(--margin);
+  }
+  nav {
+    padding: 0 24px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE - MOBILE (max-width: 768px)
+═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  :root {
+    --margin: 24px;
+    --nav-h: 60px;
+  }
+
+  nav {
+    padding: 0 20px;
+  }
+
+  /* --- INDEX GALLERY --- */
+  .obra {
+    padding: var(--nav-h) 20px 0;
+  }
+  .obra__s23 { width: 85vw; }
+  .obra__s23--xs { width: 65vw; }
+  .obra__s23--l { width: 95vw; }
+  .obra__s32 { width: 95vw; }
+
+  /* Trio: Transformamos a un scroll horizontal interno para móviles */
+  .obra__trio {
+    display: flex;
+    width: 100vw;
+    overflow-x: auto;
+    padding: 0 20px;
+    gap: 16px;
+    scroll-snap-type: x mandatory;
+  }
+  .obra__trio a {
+    flex: 0 0 75vw;
+    scroll-snap-align: center;
+  }
+
+  /* Duo: Apilamos verticalmente */
+  .obra__duo {
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+    justify-content: center;
+  }
+  .obra__duo a {
+    width: 85vw;
+    height: auto;
+  }
+
+  .obra--bleed {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .obra__xxl {
+    width: 100vw;
+  }
+
+  /* --- PROJECT PAGES --- */
+  .project-layout {
+    flex-direction: column;
+    padding: calc(var(--nav-h) + 20px) 20px 20px;
+    justify-content: flex-start;
+  }
+  
+  .project-featured {
+    width: 100%;
+    height: 55vh; 
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+  .featured-box {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .featured-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Evita que la imagen se recorte en móvil */
+  }
+
+  .project-spacer {
+    display: none;
+  }
+
+  /* Thumbs: pasan a ser una fila deslizable en la parte inferior */
+  .project-thumbs, .project-thumbs--p03 {
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    gap: 10px;
+  }
+  .thumb-row {
+    flex-direction: row;
+    gap: 10px;
+  }
+  .thumb {
+    width: auto;
+    height: 80px; /* Altura fija pequeña, el ancho se adapta al ratio */
+  }
+
+  /* p03 overrides */
+  .thumb-col--land, .thumb-col--port {
+    flex-direction: row;
+    height: auto;
+    width: auto;
+  }
+  .thumb-col--land .thumb, .thumb-col--port .thumb {
+    height: 80px;
+    width: auto;
+  }
+
+  /* --- ABOUT PAGE --- */
+  .about-layout {
+    position: static;
+    flex-direction: column;
+    padding: calc(var(--nav-h) + 40px) 20px 40px;
+    height: auto;
+    min-height: 100vh;
+    justify-content: flex-start;
+    gap: 40px;
+  }
+  .about-portrait {
+    order: 1;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+  }
+  .about-portrait img {
+    width: 100%;
+    height: auto;
+    max-height: 50vh;
+  }
+  .about-text {
+    order: 2;
+    max-width: 100%;
+  }
+
+  /* --- CONTACT PAGE --- */
+  .contact-layout {
+    padding-bottom: 60px;
+  }
+}
