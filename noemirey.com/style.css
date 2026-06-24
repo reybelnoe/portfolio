@@ -11,10 +11,11 @@
 /* ─── Tokens ──────────────────────────────────────────────────────────────── */
 :root {
   --nav-h:    48px;
+  --footer-h: 48px;
   --margin:   120px;
   --gap:      10px;
   --col-w:    14vw;
-  --inner-h:  calc(100vh - 2 * var(--margin) - var(--nav-h));
+  --inner-h:  calc(100vh - 2 * var(--margin) - var(--nav-h) - var(--footer-h));
 }
 
 /* ─── Base ────────────────────────────────────────────────────────────────── */
@@ -49,6 +50,24 @@ nav a { transition: opacity .2s; }
 nav a:hover { opacity: .4; }
 .nav-title { position: absolute; left: 50%; transform: translateX(-50%); }
 
+/* ─── Footer ──────────────────────────────────────────────────────────────── */
+footer {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 100;
+  height: var(--footer-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+footer a { transition: opacity .2s; }
+footer a:hover { opacity: .4; }
+
 /* ═══════════════════════════════════════════════════════════════════════════
    INDEX GALLERY
    One obra per viewport. Scroll-snap centers each obra.
@@ -70,7 +89,7 @@ nav a:hover { opacity: .4; }
   width: 100%;
   height: 100vh;
   flex-shrink: 0;
-  padding: var(--nav-h) var(--col-w) 0;  /* top clears nav, sides set column */
+  padding: var(--nav-h) var(--col-w) var(--footer-h);  /* top clears nav, bottom clears footer, sides set column */
   scroll-snap-align: center;
   scroll-snap-stop: normal;              /* normal = smooth deceleration */
 }
@@ -252,6 +271,14 @@ nav a:hover { opacity: .4; }
 .p03 .featured-box.is-portrait  { aspect-ratio: 2/3; }
 .p03 .featured-box.is-landscape { aspect-ratio: 3/2; }
 
+/* project-04: 1 landscape (3:2) solo row + 7 portrait (2:3) thumbs, 4 rows
+   landscape_h + 4×portrait_h + 4×gap = inner-h, both share width w
+   w×2/3 + 4×(w×3/2) + 4×gap = inner-h  →  w = (inner-h - 4×gap) × 3/20 */
+.p04 .thumb              { width: calc((var(--inner-h) - 4*var(--gap)) * 3 / 20); }
+.p04 .thumb.is-portrait  { aspect-ratio: 2/3; }
+.p04 .thumb.is-landscape { aspect-ratio: 3/2; }
+.p04 .featured-box.is-portrait { aspect-ratio: 2/3; }
+
 /* ═══════════════════════════════════════════════════════════════════════════
    ABOUT
 ═══════════════════════════════════════════════════════════════════════════ */
@@ -313,6 +340,33 @@ nav a:hover { opacity: .4; }
 }
 .contact-layout a:hover { opacity: .4; }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   IMPRESSUM
+═══════════════════════════════════════════════════════════════════════════ */
+.impressum-layout {
+  min-height: 100vh;
+  padding: calc(var(--nav-h) + var(--margin)) var(--margin) var(--margin);
+  max-width: 560px;
+}
+.impressum-layout h1 {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+.impressum-layout h2 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 28px 0 8px;
+}
+.impressum-layout p {
+  font-weight: 300;
+  line-height: 1.7;
+  letter-spacing: .01em;
+  margin-bottom: 4px;
+}
+.impressum-layout a { border-bottom: 1px solid currentColor; transition: opacity .2s; }
+.impressum-layout a:hover { opacity: .4; }
+
 
 /* ═══════════════════════════════════════════════════════════════════════════
    RESPONSIVE - TABLET (Landscape & Portrait up to 1024px)
@@ -328,7 +382,7 @@ nav a:hover { opacity: .4; }
   .project-layout, .about-layout {
     padding: var(--margin);
   }
-  nav {
+  nav, footer {
     padding: 0 24px;
   }
 
@@ -354,15 +408,16 @@ nav a:hover { opacity: .4; }
   :root {
     --margin: 24px;
     --nav-h: 60px;
+    --footer-h: 40px;
   }
 
-  nav {
+  nav, footer {
     padding: 0 20px;
   }
 
   /* --- INDEX GALLERY --- */
   .obra {
-    padding: var(--nav-h) 20px 0;
+    padding: var(--nav-h) 20px var(--footer-h);
   }
   
   /* Restricciones cruzadas de max-height y max-width para garantizar 
@@ -439,7 +494,7 @@ nav a:hover { opacity: .4; }
   /* --- PROJECT PAGES --- */
   .project-layout {
     flex-direction: column;
-    padding: calc(var(--nav-h) + 20px) 20px 20px;
+    padding: calc(var(--nav-h) + 20px) 20px var(--footer-h);
     justify-content: flex-start;
   }
   
@@ -499,6 +554,10 @@ nav a:hover { opacity: .4; }
     height: 60px;
     width: auto;
   }
+  .p04 .thumb {
+    height: 60px;
+    width: auto;
+  }
 
   /* --- ABOUT PAGE --- */
   .about-layout {
@@ -531,5 +590,11 @@ nav a:hover { opacity: .4; }
   /* --- CONTACT PAGE --- */
   .contact-layout {
     padding-bottom: 60px;
+  }
+
+  /* --- IMPRESSUM PAGE --- */
+  .impressum-layout {
+    padding: calc(var(--nav-h) + 40px) 20px 40px;
+    max-width: 100%;
   }
 }
