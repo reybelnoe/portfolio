@@ -1,8 +1,6 @@
 /* ─── Fonts ──────────────────────────────────────────────────────────────── */
+/* Only Light (300) and ExtraBold (800) files exist in assets/fonts */
 @font-face { font-family:'Karst'; src:url('assets/fonts/Karst-Light.woff2') format('woff2'),url('assets/fonts/Karst-Light.ttf') format('truetype'); font-weight:300; }
-@font-face { font-family:'Karst'; src:url('assets/fonts/Karst-Regular.woff2') format('woff2'),url('assets/fonts/Karst-Regular.ttf') format('truetype'); font-weight:400; }
-@font-face { font-family:'Karst'; src:url('assets/fonts/Karst-Medium.woff2') format('woff2'),url('assets/fonts/Karst-Medium.ttf') format('truetype'); font-weight:500; }
-@font-face { font-family:'Karst'; src:url('assets/fonts/Karst-Bold.woff2') format('woff2'),url('assets/fonts/Karst-Bold.ttf') format('truetype'); font-weight:700; }
 @font-face { font-family:'Karst'; src:url('assets/fonts/Karst-ExtraBold.woff2') format('woff2'),url('assets/fonts/Karst-ExtraBold.ttf') format('truetype'); font-weight:800; }
 
 /* ─── Reset ───────────────────────────────────────────────────────────────── */
@@ -16,6 +14,8 @@
   --gap:      10px;
   --col-w:    14vw;
   --inner-h:  calc(100vh - 2 * var(--margin) - var(--nav-h) - var(--footer-h));
+  --wh-margin: clamp(24px, 6vw, 80px);
+  --serif: 'Cormorant Garamond', Georgia, serif;
 }
 
 /* ─── Base ────────────────────────────────────────────────────────────────── */
@@ -26,7 +26,7 @@ body {
   font-weight: 300;
   background: #fff;
   color: #111;
-  overflow: hidden;
+  overflow-x: hidden; /* was overflow:hidden — fixed so wedding home scrolls correctly */
 }
 
 a { color: inherit; text-decoration: none; }
@@ -49,12 +49,12 @@ nav {
 nav a { transition: opacity .2s; }
 nav a:hover { opacity: .4; }
 .nav-title { position: absolute; left: 50%; transform: translateX(-50%); }
+.nav-left { display: flex; gap: 20px; }
+.nav-right { display: flex; align-items: center; }
+.nav-lang { cursor: default; }
 
 /* ─── Footer ──────────────────────────────────────────────────────────────── */
 footer {
-  position: fixed;
-  inset: auto 0 0 0;
-  z-index: 100;
   height: var(--footer-h);
   display: flex;
   align-items: center;
@@ -69,103 +69,191 @@ footer a { transition: opacity .2s; }
 footer a:hover { opacity: .4; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   INDEX GALLERY
-   One obra per viewport. Scroll-snap centers each obra.
-   Smooth scroll for gentle feel.
+   WEDDING HOME
 ═══════════════════════════════════════════════════════════════════════════ */
-.index-gallery {
-  height: 100vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
+.wh {
+  padding-top: var(--nav-h);
 }
 
-/* Every obra: full viewport height, content centered */
-.obra {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* ── Hero */
+.wh-hero {
+  position: relative;
   width: 100%;
-  height: 100vh;
-  flex-shrink: 0;
-  padding: var(--nav-h) var(--col-w) var(--footer-h);  /* top clears nav, bottom clears footer, sides set column */
-  scroll-snap-align: center;
-  scroll-snap-stop: normal;              /* normal = smooth deceleration */
+  height: 88vh;
+  overflow: hidden;
 }
-
-/* Images inside obra */
-.obra img {
-  display: block;
+.wh-hero img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 30%;
+  display: block;
 }
-.obra a { display: block; overflow: hidden; transition: opacity .25s; }
-.obra a:hover { opacity: .85; }
+.wh-hero__title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 var(--wh-margin) 48px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.6rem, 5.2vw, 5rem);
+  line-height: 1.05;
+  color: #111;
+}
+.wh-hero__title em { font-style: italic; }
 
-/* ── Individual image sizes */
-.obra__s23    { aspect-ratio: 3/4; width: calc((100vw - 2*var(--col-w)) / 3); }
-.obra__s23--xs { aspect-ratio: 3/4; width: calc((100vw - 2*var(--col-w)) / 3 * 0.9); }
-.obra__s23--l  { aspect-ratio: 3/4; width: calc((100vw - 2*var(--col-w)) / 3 * 1.05); }
-.obra__s32    { aspect-ratio: 3/2; width: calc((100vw - 2*var(--col-w)) * 0.6); }
+/* ── Intro */
+.wh-intro {
+  max-width: 540px;
+  margin: 72px auto;
+  padding: 0 var(--wh-margin);
+  text-align: center;
+}
+.wh-intro__tagline {
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 28px;
+}
+.wh-intro p {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+.wh-intro p + p { margin-top: 16px; }
 
-/* ── Fila 2: trio */
-.obra__trio {
+/* ── Trio */
+.wh-trio {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 52px;
-  width: calc(100vw - 2*var(--col-w));
+  gap: 6px;
+  padding: 0 var(--wh-margin);
+  margin-bottom: 96px;
 }
-.obra__trio a { aspect-ratio: 3/4; }
-
-/* ── Fila 5: duo — both images same height, widths from ratio
-   H × (4/3 + 3/4) = H × 25/12 = ref_width - gap
-   H = (ref_width - gap) × 12/25   × 1.15 scale */
-.obra__duo {
-  display: flex;
-  align-items: center;
-  gap: var(--col-w);
-  overflow: visible;
-}
-.obra__duo a {
-  display: block;
+.wh-trio__item {
   overflow: hidden;
-  flex: 0 0 auto;
-  height: calc((100vw - 3*var(--col-w)) * 12 / 25 * 1.15);
-  transition: opacity .25s;
-}
-.obra__duo a:hover { opacity: .85; }
-.obra__duo--land { aspect-ratio: 4/3; width: auto; }
-.obra__duo--port { aspect-ratio: 3/4; width: auto; }
-.obra__duo img   { display: block; width: 100%; height: 100%; object-fit: cover; }
-
-/* ── Fila 6: XXL bleed — original width, section taller than viewport.
-   scroll-snap disabled on this section (JS toggles it). */
-.obra--bleed {
-  align-items: flex-start;
-  /* Same horizontal padding as other obras */
-  padding: 0 var(--col-w);
-  /* Height = image natural height + same top/bottom margin as other obras.
-     Other obras are 100vh with content centered → margin each side ≈ (100vh - img_h) / 2.
-     For bleed we add an explicit top and bottom gap equal to half a viewport
-     so the entry/exit feel identical to other rows. */
-  padding-top: calc(25vh - var(--nav-h) / 4);
-  padding-bottom: 25vh;
-  height: auto;
-  min-height: 100vh;
-}
-.obra__xxl {
   aspect-ratio: 3/4;
-  width: calc((100vw - 2*var(--col-w)) * 1.05);
-  overflow: hidden;
-  flex-shrink: 0;
 }
-.obra__xxl img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.wh-trio__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
-/* When snap is disabled on the gallery, free scroll is active */
-.index-gallery.snap-off {
-  scroll-snap-type: none;
+/* ── Based in Ibiza */
+.wh-based {
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto 96px;
+  padding: 0 24px;
+}
+.wh-based__heading {
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin-bottom: 24px;
+}
+.wh-based p {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
+/* ── Moment sections (Getting ready / Ceremony / Dinner and party) */
+.wh-moment {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "img text";
+  margin-bottom: 80px;
+  padding: 0 var(--wh-margin);
+  align-items: center;
+  gap: 0;
+}
+.wh-moment--img-right {
+  grid-template-areas: "text img";
+}
+.wh-moment__img {
+  grid-area: img;
+  overflow: hidden;
+}
+.wh-moment__img img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  display: block;
+}
+.wh-moment__text {
+  grid-area: text;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+  text-align: center;
+}
+.wh-moment__heading {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.wh-moment__heading em { font-style: italic; }
+.wh-moment__body {
+  font-size: 0.88rem;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+  max-width: 300px;
+}
+
+/* ── CTA */
+.wh-cta {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 0;
+  padding: 80px 24px 88px;
+}
+.wh-cta__pre {
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+}
+.wh-cta__title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+  line-height: 1.35;
+  margin-bottom: 32px;
+}
+.wh-cta__title em { font-style: italic; }
+.wh-cta__link {
+  font-size: 0.88rem;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid #111;
+  padding-bottom: 2px;
+  transition: opacity .2s;
+}
+.wh-cta__link:hover { opacity: .4; }
+
+/* ── Strip */
+.wh-strip {
+  display: flex;
+  gap: 0;
+  overflow-x: hidden;
+}
+.wh-strip__item {
+  flex: 0 0 calc(100% / 4.3);
+  overflow: hidden;
+}
+.wh-strip__item img {
+  display: block;
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -182,9 +270,7 @@ footer a:hover { opacity: .4; }
   background: #fff;
 }
 
-/* ── Thumb column (project-01, 02)
-   3 rows of 3:4 portrait, 2 thumbs per row.
-   3 × (w × 4/3) + 2 × gap = inner-h  →  w = (inner-h - 2×gap) / 4  */
+/* ── Thumb column (project-01, 02) */
 .project-thumbs {
   flex: 0 0 auto;
   height: var(--inner-h);
@@ -211,9 +297,7 @@ footer a:hover { opacity: .4; }
 }
 .thumb:hover img, .thumb.active img { opacity: .65; }
 
-/* ── project-03 thumb layout
-   Left col:  6 × 3:2  →  h = (inner-h - 5×gap)/6,  w = h×3/2
-   Right col: 3 × 2:3  →  h = (inner-h - 2×gap)/3,  w = h×2/3  */
+/* ── project-03 thumb layout */
 .project-thumbs--p03 {
   flex: 0 0 auto;
   height: var(--inner-h);
@@ -267,13 +351,9 @@ footer a:hover { opacity: .4; }
 }
 .featured-box img.is-loading { opacity: 0; }
 
-/* project-03: restore 2:3 and 3:2 ratios */
 .p03 .featured-box.is-portrait  { aspect-ratio: 2/3; }
 .p03 .featured-box.is-landscape { aspect-ratio: 3/2; }
 
-/* project-04: 1 landscape (3:2) solo row + 7 portrait (2:3) thumbs, 4 rows
-   landscape_h + 4×portrait_h + 4×gap = inner-h, both share width w
-   w×2/3 + 4×(w×3/2) + 4×gap = inner-h  →  w = (inner-h - 4×gap) × 3/20 */
 .p04 .thumb              { width: calc((var(--inner-h) - 4*var(--gap)) * 3 / 20); }
 .p04 .thumb.is-portrait  { aspect-ratio: 2/3; }
 .p04 .thumb.is-landscape { aspect-ratio: 3/2; }
@@ -291,8 +371,6 @@ footer a:hover { opacity: .4; }
   padding: var(--margin);
   background: #fff;
 }
-
-/* Text: bottom-left, like thumb column lower area */
 .about-text {
   align-self: flex-end;
   padding-bottom: 0;
@@ -303,8 +381,6 @@ footer a:hover { opacity: .4; }
   line-height: 1.7;
   letter-spacing: .01em;
 }
-
-/* Portrait: same position/size as project featured viewer */
 .about-portrait {
   flex: 0 0 auto;
   height: var(--inner-h);
@@ -331,7 +407,7 @@ footer a:hover { opacity: .4; }
   padding-bottom: var(--margin);
 }
 .contact-layout a {
-  font-size: 1.5rem;   /* 50% larger than base (1rem = 14.3px → 1.5rem = 21.45px) */
+  font-size: 1.5rem;
   font-weight: 300;
   letter-spacing: .01em;
   border-bottom: 1px solid #111;
@@ -350,12 +426,12 @@ footer a:hover { opacity: .4; }
 }
 .impressum-layout h1 {
   font-size: 1.3rem;
-  font-weight: 500;
+  font-weight: 800;
   margin-bottom: 24px;
 }
 .impressum-layout h2 {
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 800;
   margin: 28px 0 8px;
 }
 .impressum-layout p {
@@ -367,17 +443,14 @@ footer a:hover { opacity: .4; }
 .impressum-layout a { border-bottom: 1px solid currentColor; transition: opacity .2s; }
 .impressum-layout a:hover { opacity: .4; }
 
-
 /* ═══════════════════════════════════════════════════════════════════════════
-   RESPONSIVE - TABLET (Landscape & Portrait up to 1024px)
+   RESPONSIVE — TABLET (max-width: 1024px)
 ═══════════════════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
   :root {
     --margin: 60px;
     --col-w: 8vw;
-  }
-  .obra__trio {
-    gap: 20px;
+    --wh-margin: 40px;
   }
   .project-layout, .about-layout {
     padding: var(--margin);
@@ -385,119 +458,81 @@ footer a:hover { opacity: .4; }
   nav, footer {
     padding: 0 24px;
   }
-
-  /* Alturas dinámicas para centrado perfecto ignorando la UI de Safari/Chrome */
-  .index-gallery {
-    height: 100vh;
-    height: 100dvh;
-  }
-  .obra {
-    height: 100vh;
-    height: 100dvh;
-  }
-  .obra--bleed {
-    min-height: 100vh;
-    min-height: 100dvh;
-  }
+  .wh-trio { gap: 4px; }
+  .wh-moment__text { padding: 32px 24px; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   RESPONSIVE - MOBILE (max-width: 768px)
+   RESPONSIVE — MOBILE (max-width: 768px)
 ═══════════════════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
   :root {
     --margin: 24px;
     --nav-h: 60px;
     --footer-h: 40px;
+    --wh-margin: 20px;
   }
 
   nav, footer {
     padding: 0 20px;
   }
+  .nav-left { gap: 16px; }
 
-  /* --- INDEX GALLERY --- */
-  .obra {
-    padding: var(--nav-h) 20px var(--footer-h);
-  }
-  
-  /* Restricciones cruzadas de max-height y max-width para garantizar 
-     que nunca desbordan ni en vertical ni en horizontal (landscape) */
-  .obra__s23 { 
-    width: 85vw; 
-    max-height: calc(100vh - var(--nav-h) - 40px);
-    max-width: calc((100vh - var(--nav-h) - 40px) * 3 / 4);
-    max-height: calc(100dvh - var(--nav-h) - 40px);
-    max-width: calc((100dvh - var(--nav-h) - 40px) * 3 / 4);
-  }
-  .obra__s23--xs { 
-    width: 65vw; 
-    max-height: calc(80vh - var(--nav-h) - 40px);
-    max-width: calc((80vh - var(--nav-h) - 40px) * 3 / 4);
-    max-height: calc(80dvh - var(--nav-h) - 40px);
-    max-width: calc((80dvh - var(--nav-h) - 40px) * 3 / 4);
-  }
-  .obra__s23--l { 
-    width: 95vw; 
-    max-height: calc(100vh - var(--nav-h) - 20px);
-    max-width: calc((100vh - var(--nav-h) - 20px) * 3 / 4);
-    max-height: calc(100dvh - var(--nav-h) - 20px);
-    max-width: calc((100dvh - var(--nav-h) - 20px) * 3 / 4);
-  }
-  .obra__s32 { 
-    width: 95vw; 
-    max-height: calc(100vh - var(--nav-h) - 40px);
-    max-width: calc((100vh - var(--nav-h) - 40px) * 3 / 2);
-    max-height: calc(100dvh - var(--nav-h) - 40px);
-    max-width: calc((100dvh - var(--nav-h) - 40px) * 3 / 2);
+  /* ── Wedding home ── */
+  .wh-hero { height: 75vh; height: 75dvh; }
+  .wh-hero__title {
+    font-size: clamp(2rem, 8vw, 3rem);
+    padding: 0 20px 32px;
   }
 
-  /* Trio: Scroll horizontal nativo */
-  .obra__trio {
-    display: flex;
-    width: 100vw;
+  .wh-intro { margin: 48px auto; }
+
+  .wh-trio {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 0 var(--wh-margin);
+    margin-bottom: 64px;
+  }
+  .wh-trio__item { aspect-ratio: 4/3; }
+
+  .wh-based { margin-bottom: 64px; }
+
+  .wh-moment {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "img"
+      "text";
+    padding: 0 var(--wh-margin);
+    margin-bottom: 56px;
+  }
+  .wh-moment--img-right {
+    grid-template-areas:
+      "img"
+      "text";
+  }
+  .wh-moment__img img { aspect-ratio: 4/3; }
+  .wh-moment__text { padding: 28px 0; }
+  .wh-moment__body { max-width: 100%; }
+
+  .wh-cta { padding: 56px 24px 64px; }
+
+  .wh-strip {
     overflow-x: auto;
-    padding: 0 20px;
-    gap: 16px;
+    -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    align-items: center;
   }
-  .obra__trio a {
-    flex: 0 0 75vw;
-    max-height: calc(100vh - var(--nav-h) - 40px);
-    max-height: calc(100dvh - var(--nav-h) - 40px);
-    scroll-snap-align: center;
+  .wh-strip__item {
+    flex: 0 0 80vw;
+    scroll-snap-align: start;
   }
+  .wh-strip__item img { height: 220px; }
 
-  /* Duo: Apilado vertical ajustado para no romper el aspecto horizontal */
-  .obra__duo {
-    flex-direction: column;
-    width: 100%;
-    gap: 16px;
-    justify-content: center;
-    align-items: center;
-  }
-  .obra__duo a {
-    width: 85vw;
-    height: auto;
-    max-height: calc((100vh - var(--nav-h) - 40px) / 2);
-    max-height: calc((100dvh - var(--nav-h) - 40px) / 2);
-  }
-
-  .obra--bleed {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .obra__xxl {
-    width: 100vw;
-  }
-
-  /* --- PROJECT PAGES --- */
+  /* ── Project pages ── */
   .project-layout {
     flex-direction: column;
     padding: calc(var(--nav-h) + 20px) 20px var(--footer-h);
     justify-content: flex-start;
   }
-  
   .project-featured {
     width: 100%;
     height: 55vh;
@@ -516,16 +551,10 @@ footer a:hover { opacity: .4; }
     height: 100%;
     object-fit: contain;
   }
-
-  .project-spacer {
-    display: none;
-  }
-
-  /* Thumbs: Wrapper flex centrado. 
-     Al ocupar 100% copia milimetricamente los márgenes del featured-box */
+  .project-spacer { display: none; }
   .project-thumbs, .project-thumbs--p03 {
     flex-direction: row;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -538,11 +567,7 @@ footer a:hover { opacity: .4; }
     justify-content: center;
     gap: 10px;
   }
-  .thumb {
-    width: auto;
-    height: 60px;
-  }
-
+  .thumb { width: auto; height: 60px; }
   .thumb-col--land, .thumb-col--port {
     flex-direction: row;
     flex-wrap: wrap;
@@ -550,16 +575,10 @@ footer a:hover { opacity: .4; }
     height: auto;
     width: auto;
   }
-  .thumb-col--land .thumb, .thumb-col--port .thumb {
-    height: 60px;
-    width: auto;
-  }
-  .p04 .thumb {
-    height: 60px;
-    width: auto;
-  }
+  .thumb-col--land .thumb, .thumb-col--port .thumb { height: 60px; width: auto; }
+  .p04 .thumb { height: 60px; width: auto; }
 
-  /* --- ABOUT PAGE --- */
+  /* ── About page ── */
   .about-layout {
     position: static;
     flex-direction: column;
@@ -582,17 +601,12 @@ footer a:hover { opacity: .4; }
     max-height: 50vh;
     max-height: 50dvh;
   }
-  .about-text {
-    order: 2;
-    max-width: 100%;
-  }
+  .about-text { order: 2; max-width: 100%; }
 
-  /* --- CONTACT PAGE --- */
-  .contact-layout {
-    padding-bottom: 60px;
-  }
+  /* ── Contact page ── */
+  .contact-layout { padding-bottom: 60px; }
 
-  /* --- IMPRESSUM PAGE --- */
+  /* ── Impressum ── */
   .impressum-layout {
     padding: calc(var(--nav-h) + 40px) 20px 40px;
     max-width: 100%;
