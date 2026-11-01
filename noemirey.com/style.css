@@ -1,7 +1,9 @@
 /* ─── Fonts ──────────────────────────────────────────────────────────────── */
-/* Only Light (300) and ExtraBold (800) files exist in assets/fonts */
-@font-face { font-family:'Karst'; src:url('assets/fonts/Karst-Light.woff2') format('woff2'),url('assets/fonts/Karst-Light.ttf') format('truetype'); font-weight:300; }
-@font-face { font-family:'Karst'; src:url('assets/fonts/Karst-ExtraBold.woff2') format('woff2'),url('assets/fonts/Karst-ExtraBold.ttf') format('truetype'); font-weight:800; }
+@font-face { font-family:'Avenir'; src:url('assets/fonts/avenir-light.woff2') format('woff2'); font-weight:300; font-display:swap; }
+@font-face { font-family:'Avenir'; src:url('assets/fonts/avenir-book.woff2') format('woff2'); font-weight:400; font-display:swap; }
+@font-face { font-family:'Avenir'; src:url('assets/fonts/avenir-medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Avenir'; src:url('assets/fonts/avenir-black.woff2') format('woff2'); font-weight:800; font-display:swap; }
+@font-face { font-family:'Happy Time'; src:url('assets/fonts/happy-time.woff2') format('woff2'); font-weight:400; font-style:italic; font-display:swap; }
 
 /* ─── Reset ───────────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,14 +17,14 @@
   --col-w:    14vw;
   --inner-h:  calc(100vh - 2 * var(--margin) - var(--nav-h) - var(--footer-h));
   --wh-margin: clamp(24px, 6vw, 80px);
-  --serif: 'Cormorant Garamond', Georgia, serif;
+  --serif: 'Happy Time', Georgia, serif;
 }
 
 /* ─── Base ────────────────────────────────────────────────────────────────── */
 html { font-size: 14.3px; }
 
 body {
-  font-family: 'Karst', Georgia, serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   font-weight: 300;
   background: #fff;
   color: #111;
