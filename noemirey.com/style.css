@@ -16,7 +16,7 @@
   --gap:      10px;
   --col-w:    14vw;
   --inner-h:  calc(100vh - 2 * var(--margin) - var(--nav-h) - var(--footer-h));
-  --wh-margin: clamp(24px, 6vw, 80px);
+  --wh-margin: clamp(32px, 5vw, 72px);
   --serif: 'Happy Time', Georgia, serif;
 }
 
@@ -28,8 +28,11 @@ body {
   font-weight: 300;
   background: #fff;
   color: #111;
-  overflow-x: hidden; /* was overflow:hidden — fixed so wedding home scrolls correctly */
+  overflow-x: hidden;
 }
+
+/* Home page: body overflow hidden so the snap container controls scrolling */
+body.home { overflow: hidden; }
 
 a { color: inherit; text-decoration: none; }
 
@@ -57,6 +60,9 @@ nav a:hover { opacity: .4; }
 
 /* ─── Footer ──────────────────────────────────────────────────────────────── */
 footer {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 100;
   height: var(--footer-h);
   display: flex;
   align-items: center;
@@ -71,121 +77,155 @@ footer a { transition: opacity .2s; }
 footer a:hover { opacity: .4; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   WEDDING HOME
+   WEDDING HOME — scroll-snap, one section per viewport
 ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Scroll container */
 .wh {
-  padding-top: var(--nav-h);
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
-/* ── Hero */
+/* Every section = one full viewport */
+.wh-hero,
+.wh-intro,
+.wh-trio,
+.wh-based,
+.wh-moment,
+.wh-cta,
+.wh-strip {
+  height: 100vh;
+  height: 100dvh;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* ── Hero ── full-bleed photo + title overlay */
 .wh-hero {
   position: relative;
-  width: 100%;
-  height: 88vh;
   overflow: hidden;
 }
 .wh-hero img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
-  display: block;
+  object-position: center 35%;
 }
 .wh-hero__title {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0 var(--wh-margin) 48px;
+  bottom: calc(var(--footer-h) + 40px);
+  left: var(--wh-margin);
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(2.6rem, 5.2vw, 5rem);
-  line-height: 1.05;
+  font-size: clamp(3rem, 5.5vw, 5.5rem);
   color: #111;
+  line-height: 1.05;
+  z-index: 1;
 }
-.wh-hero__title em { font-style: italic; }
 
-/* ── Intro */
+/* ── Intro ── text only, vertically centered */
 .wh-intro {
-  max-width: 540px;
-  margin: 72px auto;
-  padding: 0 var(--wh-margin);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  padding: var(--nav-h) clamp(48px, 15vw, 220px) var(--footer-h);
 }
 .wh-intro__tagline {
   font-size: 0.9rem;
-  letter-spacing: 0.04em;
-  margin-bottom: 28px;
+  letter-spacing: 0.05em;
+  margin-bottom: 36px;
 }
 .wh-intro p {
   font-size: 0.9rem;
-  line-height: 1.8;
-  letter-spacing: 0.01em;
+  line-height: 1.9;
+  max-width: 520px;
 }
 .wh-intro p + p { margin-top: 16px; }
 
-/* ── Trio */
+/* ── Trio ── three portrait photos at natural ratio */
 .wh-trio {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 6px;
-  padding: 0 var(--wh-margin);
-  margin-bottom: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: var(--nav-h) var(--wh-margin) var(--footer-h);
 }
 .wh-trio__item {
-  overflow: hidden;
-  aspect-ratio: 3/4;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: calc(100vh - var(--nav-h) - var(--footer-h));
+  height: calc(100dvh - var(--nav-h) - var(--footer-h));
 }
 .wh-trio__item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   display: block;
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
 }
 
-/* ── Based in Ibiza */
+/* ── Based in Ibiza ── text only, vertically centered */
 .wh-based {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  max-width: 400px;
-  margin: 0 auto 96px;
-  padding: 0 24px;
+  padding: var(--nav-h) 24px var(--footer-h);
 }
 .wh-based__heading {
   font-size: 0.9rem;
   font-weight: 300;
-  letter-spacing: 0.05em;
-  margin-bottom: 24px;
+  letter-spacing: 0.06em;
+  margin-bottom: 32px;
 }
 .wh-based p {
   font-size: 0.9rem;
-  line-height: 1.8;
-  letter-spacing: 0.01em;
+  line-height: 1.9;
+  max-width: 380px;
 }
 
-/* ── Moment sections (Getting ready / Ceremony / Dinner and party) */
+/* ── Moment sections ── photo at natural ratio + text */
 .wh-moment {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "img text";
-  margin-bottom: 80px;
-  padding: 0 var(--wh-margin);
-  align-items: center;
-  gap: 0;
+  padding-top: var(--nav-h);
+  padding-bottom: var(--footer-h);
 }
-.wh-moment--img-right {
-  grid-template-areas: "text img";
-}
+.wh-moment--img-right { grid-template-areas: "text img"; }
+
 .wh-moment__img {
   grid-area: img;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
   overflow: hidden;
 }
 .wh-moment__img img {
-  width: 100%;
-  aspect-ratio: 3/4;
-  object-fit: cover;
   display: block;
+  /* Natural aspect ratio — max-height/width contain it without cropping */
+  max-height: calc(100vh - var(--nav-h) - var(--footer-h) - 48px);
+  max-height: calc(100dvh - var(--nav-h) - var(--footer-h) - 48px);
+  max-width: 100%;
+  width: auto;
+  height: auto;
 }
+
 .wh-moment__text {
   grid-area: text;
   display: flex;
@@ -199,39 +239,39 @@ footer a:hover { opacity: .4; }
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-size: clamp(2rem, 3.2vw, 3.2rem);
   line-height: 1.1;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
-.wh-moment__heading em { font-style: italic; }
 .wh-moment__body {
   font-size: 0.88rem;
-  line-height: 1.85;
-  letter-spacing: 0.01em;
+  line-height: 1.9;
   max-width: 300px;
 }
 
-/* ── CTA */
+/* ── CTA ── text only, vertically centered */
 .wh-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  max-width: 560px;
-  margin: 0 auto 0;
-  padding: 80px 24px 88px;
+  padding: var(--nav-h) 24px var(--footer-h);
 }
 .wh-cta__pre {
   font-size: 0.85rem;
-  letter-spacing: 0.04em;
-  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+  margin-bottom: 24px;
 }
 .wh-cta__title {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+  font-size: clamp(1.6rem, 2.8vw, 2.6rem);
   line-height: 1.35;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
+  max-width: 520px;
 }
-.wh-cta__title em { font-style: italic; }
 .wh-cta__link {
   font-size: 0.88rem;
   letter-spacing: 0.03em;
@@ -241,20 +281,27 @@ footer a:hover { opacity: .4; }
 }
 .wh-cta__link:hover { opacity: .4; }
 
-/* ── Strip */
+/* ── Strip ── landscape photos at natural 4:3 ratio */
 .wh-strip {
   display: flex;
-  gap: 0;
+  align-items: center;
+  gap: 4px;
+  padding: var(--nav-h) 0 var(--footer-h);
   overflow-x: hidden;
 }
 .wh-strip__item {
-  flex: 0 0 calc(100% / 4.3);
+  flex: 0 0 auto;
+  /* Height at ~65% of available space, width follows 4:3 ratio naturally */
+  height: calc(65vh - var(--nav-h) - var(--footer-h));
+  height: calc(65dvh - var(--nav-h) - var(--footer-h));
+  aspect-ratio: 4/3;
   overflow: hidden;
 }
 .wh-strip__item img {
   display: block;
   width: 100%;
-  height: 340px;
+  height: 100%;
+  /* Container is exactly 4:3, images are 4:3 → no cropping */
   object-fit: cover;
 }
 
@@ -272,7 +319,6 @@ footer a:hover { opacity: .4; }
   background: #fff;
 }
 
-/* ── Thumb column (project-01, 02) */
 .project-thumbs {
   flex: 0 0 auto;
   height: var(--inner-h);
@@ -299,7 +345,6 @@ footer a:hover { opacity: .4; }
 }
 .thumb:hover img, .thumb.active img { opacity: .65; }
 
-/* ── project-03 thumb layout */
 .project-thumbs--p03 {
   flex: 0 0 auto;
   height: var(--inner-h);
@@ -331,7 +376,6 @@ footer a:hover { opacity: .4; }
   aspect-ratio: 2/3;
 }
 
-/* ── Spacer + featured */
 .project-spacer { flex: 1 1 auto; }
 
 .project-featured {
@@ -423,7 +467,7 @@ footer a:hover { opacity: .4; }
 ═══════════════════════════════════════════════════════════════════════════ */
 .impressum-layout {
   min-height: 100vh;
-  padding: calc(var(--nav-h) + var(--margin)) var(--margin) var(--margin);
+  padding: calc(var(--nav-h) + var(--margin)) var(--margin) calc(var(--footer-h) + var(--margin));
   max-width: 560px;
 }
 .impressum-layout h1 {
@@ -452,14 +496,10 @@ footer a:hover { opacity: .4; }
   :root {
     --margin: 60px;
     --col-w: 8vw;
-    --wh-margin: 40px;
+    --wh-margin: 32px;
   }
-  .project-layout, .about-layout {
-    padding: var(--margin);
-  }
-  nav, footer {
-    padding: 0 24px;
-  }
+  .project-layout, .about-layout { padding: var(--margin); }
+  nav, footer { padding: 0 24px; }
   .wh-trio { gap: 4px; }
   .wh-moment__text { padding: 32px 24px; }
 }
@@ -470,64 +510,107 @@ footer a:hover { opacity: .4; }
 @media (max-width: 768px) {
   :root {
     --margin: 24px;
-    --nav-h: 60px;
+    --nav-h: 52px;
     --footer-h: 40px;
     --wh-margin: 20px;
   }
 
-  nav, footer {
-    padding: 0 20px;
-  }
+  nav, footer { padding: 0 20px; }
   .nav-left { gap: 16px; }
 
-  /* ── Wedding home ── */
-  .wh-hero { height: 75vh; height: 75dvh; }
-  .wh-hero__title {
-    font-size: clamp(2rem, 8vw, 3rem);
-    padding: 0 20px 32px;
+  /* ── Wedding home on mobile: natural scroll, no snap ── */
+  body.home { overflow-x: hidden; overflow-y: auto; }
+
+  .wh {
+    height: auto;
+    overflow-y: visible;
+    scroll-snap-type: none;
   }
 
-  .wh-intro { margin: 48px auto; }
+  .wh-hero,
+  .wh-intro,
+  .wh-trio,
+  .wh-based,
+  .wh-moment,
+  .wh-cta,
+  .wh-strip {
+    height: auto;
+    min-height: 100svh;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+  }
 
+  /* Hero: keep full-screen */
+  .wh-hero { height: 100svh; }
+
+  /* Intro / Based / CTA: auto height */
+  .wh-intro,
+  .wh-based,
+  .wh-cta {
+    min-height: 0;
+    padding: calc(var(--nav-h) + 48px) 32px calc(var(--footer-h) + 48px);
+  }
+
+  /* Trio: horizontal scroll strip */
   .wh-trio {
-    grid-template-columns: 1fr;
+    min-height: 0;
+    padding: var(--nav-h) 0 var(--footer-h);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    justify-content: flex-start;
     gap: 4px;
-    padding: 0 var(--wh-margin);
-    margin-bottom: 64px;
+    height: 100svh;
   }
-  .wh-trio__item { aspect-ratio: 4/3; }
+  .wh-trio__item {
+    flex: 0 0 78vw;
+    height: calc(100svh - var(--nav-h) - var(--footer-h));
+    scroll-snap-align: center;
+  }
 
-  .wh-based { margin-bottom: 64px; }
-
+  /* Moments: image stacks above text */
   .wh-moment {
     grid-template-columns: 1fr;
     grid-template-areas:
       "img"
       "text";
-    padding: 0 var(--wh-margin);
-    margin-bottom: 56px;
+    padding: var(--nav-h) 0 var(--footer-h);
   }
   .wh-moment--img-right {
     grid-template-areas:
       "img"
       "text";
   }
-  .wh-moment__img img { aspect-ratio: 4/3; }
-  .wh-moment__text { padding: 28px 0; }
+  .wh-moment__img {
+    padding: 16px var(--wh-margin);
+    height: 58svh;
+  }
+  .wh-moment__img img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+  .wh-moment__text {
+    height: auto;
+    min-height: 0;
+    padding: 28px var(--wh-margin) 32px;
+  }
   .wh-moment__body { max-width: 100%; }
 
-  .wh-cta { padding: 56px 24px 64px; }
-
+  /* Strip: horizontal scroll */
   .wh-strip {
+    min-height: 0;
+    height: auto;
+    padding: 0;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
+    gap: 4px;
   }
   .wh-strip__item {
-    flex: 0 0 80vw;
+    flex: 0 0 85vw;
+    height: 56vw; /* 85vw at 4:3 ≈ 64vw, slightly taller crop */
     scroll-snap-align: start;
   }
-  .wh-strip__item img { height: 220px; }
 
   /* ── Project pages ── */
   .project-layout {
@@ -538,7 +621,6 @@ footer a:hover { opacity: .4; }
   .project-featured {
     width: 100%;
     height: 55vh;
-    height: 55dvh;
     margin-bottom: 20px;
     justify-content: center;
   }
@@ -548,11 +630,7 @@ footer a:hover { opacity: .4; }
     display: flex;
     justify-content: center;
   }
-  .featured-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
+  .featured-box img { width: 100%; height: 100%; object-fit: contain; }
   .project-spacer { display: none; }
   .project-thumbs, .project-thumbs--p03 {
     flex-direction: row;
@@ -564,11 +642,7 @@ footer a:hover { opacity: .4; }
     padding-bottom: 10px;
     gap: 10px;
   }
-  .thumb-row {
-    flex-direction: row;
-    justify-content: center;
-    gap: 10px;
-  }
+  .thumb-row { flex-direction: row; justify-content: center; gap: 10px; }
   .thumb { width: auto; height: 60px; }
   .thumb-col--land, .thumb-col--port {
     flex-direction: row;
@@ -584,24 +658,17 @@ footer a:hover { opacity: .4; }
   .about-layout {
     position: static;
     flex-direction: column;
-    padding: calc(var(--nav-h) + 40px) 20px 40px;
+    padding: calc(var(--nav-h) + 40px) 20px calc(var(--footer-h) + 40px);
     height: auto;
     min-height: 100vh;
-    min-height: 100dvh;
     justify-content: flex-start;
     gap: 40px;
   }
   .about-portrait {
-    order: 1;
-    width: 100%;
-    height: auto;
-    justify-content: center;
+    order: 1; width: 100%; height: auto; justify-content: center;
   }
   .about-portrait img {
-    width: 100%;
-    height: auto;
-    max-height: 50vh;
-    max-height: 50dvh;
+    width: 100%; height: auto; max-height: 50vh;
   }
   .about-text { order: 2; max-width: 100%; }
 
@@ -610,7 +677,7 @@ footer a:hover { opacity: .4; }
 
   /* ── Impressum ── */
   .impressum-layout {
-    padding: calc(var(--nav-h) + 40px) 20px 40px;
+    padding: calc(var(--nav-h) + 40px) 20px calc(var(--footer-h) + 40px);
     max-width: 100%;
   }
 }
