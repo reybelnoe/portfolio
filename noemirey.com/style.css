@@ -1,9 +1,9 @@
 /* ─── Fonts ──────────────────────────────────────────────────────────────── */
-@font-face { font-family:'Karst'; src:url('assets/fonts/Karst-Light.woff2') format('woff2'),url('assets/fonts/Karst-Light.ttf') format('truetype'); font-weight:300; }
-@font-face { font-family:'Karst'; src:url('assets/fonts/Karst-Regular.woff2') format('woff2'),url('assets/fonts/Karst-Regular.ttf') format('truetype'); font-weight:400; }
-@font-face { font-family:'Karst'; src:url('assets/fonts/Karst-Medium.woff2') format('woff2'),url('assets/fonts/Karst-Medium.ttf') format('truetype'); font-weight:500; }
-@font-face { font-family:'Karst'; src:url('assets/fonts/Karst-Bold.woff2') format('woff2'),url('assets/fonts/Karst-Bold.ttf') format('truetype'); font-weight:700; }
-@font-face { font-family:'Karst'; src:url('assets/fonts/Karst-ExtraBold.woff2') format('woff2'),url('assets/fonts/Karst-ExtraBold.ttf') format('truetype'); font-weight:800; }
+@font-face { font-family:'Avenir'; src:url('assets/fonts/avenir-light.woff2') format('woff2'); font-weight:300; font-display:swap; }
+@font-face { font-family:'Avenir'; src:url('assets/fonts/avenir-book.woff2') format('woff2'); font-weight:400; font-display:swap; }
+@font-face { font-family:'Avenir'; src:url('assets/fonts/avenir-medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Avenir'; src:url('assets/fonts/avenir-black.woff2') format('woff2'); font-weight:800; font-display:swap; }
+@font-face { font-family:'Happy Time'; src:url('assets/fonts/happy-time.woff2') format('woff2'); font-weight:400; font-style:italic; font-display:swap; }
 
 /* ─── Reset ───────────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -16,18 +16,23 @@
   --gap:      10px;
   --col-w:    14vw;
   --inner-h:  calc(100vh - 2 * var(--margin) - var(--nav-h) - var(--footer-h));
+  --wh-margin: clamp(32px, 5vw, 72px);
+  --serif: 'Happy Time', Georgia, serif;
 }
 
 /* ─── Base ────────────────────────────────────────────────────────────────── */
 html { font-size: 14.3px; }
 
 body {
-  font-family: 'Karst', Georgia, serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   font-weight: 300;
   background: #fff;
   color: #111;
-  overflow: hidden;
+  overflow-x: hidden;
 }
+
+/* Home page: body overflow hidden so the snap container controls scrolling */
+body.home { overflow: hidden; }
 
 a { color: inherit; text-decoration: none; }
 
@@ -49,6 +54,9 @@ nav {
 nav a { transition: opacity .2s; }
 nav a:hover { opacity: .4; }
 .nav-title { position: absolute; left: 50%; transform: translateX(-50%); }
+.nav-left { display: flex; gap: 20px; }
+.nav-right { display: flex; align-items: center; }
+.nav-lang { cursor: default; }
 
 /* ─── Footer ──────────────────────────────────────────────────────────────── */
 footer {
@@ -69,103 +77,237 @@ footer a { transition: opacity .2s; }
 footer a:hover { opacity: .4; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   INDEX GALLERY
-   One obra per viewport. Scroll-snap centers each obra.
-   Smooth scroll for gentle feel.
+   WEDDING HOME — scroll-snap, one section per viewport
 ═══════════════════════════════════════════════════════════════════════════ */
-.index-gallery {
+
+/* Scroll container */
+.wh {
   height: 100vh;
+  height: 100dvh;
   overflow-y: scroll;
   overflow-x: hidden;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
 }
 
-/* Every obra: full viewport height, content centered */
-.obra {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+/* Every section = one full viewport */
+.wh-hero,
+.wh-intro,
+.wh-trio,
+.wh-based,
+.wh-moment,
+.wh-cta,
+.wh-strip {
   height: 100vh;
+  height: 100dvh;
   flex-shrink: 0;
-  padding: var(--nav-h) var(--col-w) var(--footer-h);  /* top clears nav, bottom clears footer, sides set column */
-  scroll-snap-align: center;
-  scroll-snap-stop: normal;              /* normal = smooth deceleration */
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
-/* Images inside obra */
-.obra img {
+/* ── Hero ── full-bleed photo + title overlay */
+.wh-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: var(--nav-h);
+  padding-bottom: var(--footer-h);
+  overflow: hidden;
+}
+.wh-hero img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: calc((100dvh - var(--nav-h) - var(--footer-h)) * 0.88);
+  max-width: 40%;
+}
+.wh-hero__title {
+  position: absolute;
+  bottom: var(--footer-h);
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 7rem);
+  line-height: 1;
+  color: #444;
+}
+
+/* ── Intro ── text only, vertically centered */
+.wh-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--nav-h) clamp(48px, 15vw, 220px) var(--footer-h);
+}
+.wh-intro__tagline {
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 36px;
+}
+.wh-intro p {
+  font-size: 0.9rem;
+  line-height: 1.9;
+  max-width: 520px;
+}
+.wh-intro p + p { margin-top: 16px; }
+
+/* ── Trio ── three portrait photos at natural ratio */
+.wh-trio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: var(--nav-h) var(--wh-margin) var(--footer-h);
+}
+.wh-trio__item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: calc(100vh - var(--nav-h) - var(--footer-h));
+  height: calc(100dvh - var(--nav-h) - var(--footer-h));
+}
+.wh-trio__item img {
+  display: block;
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+
+/* ── Based in Ibiza ── text only, vertically centered */
+.wh-based {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--nav-h) 24px var(--footer-h);
+}
+.wh-based__heading {
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  margin-bottom: 32px;
+}
+.wh-based p {
+  font-size: 0.9rem;
+  line-height: 1.9;
+  max-width: 380px;
+}
+
+/* ── Moment sections ── photo at natural ratio + text */
+.wh-moment {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "img text";
+  padding-top: var(--nav-h);
+  padding-bottom: var(--footer-h);
+}
+.wh-moment--img-right { grid-template-areas: "text img"; }
+
+.wh-moment__img {
+  grid-area: img;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  overflow: hidden;
+}
+.wh-moment__img img {
+  display: block;
+  /* Natural aspect ratio — max-height/width contain it without cropping */
+  max-height: calc(100vh - var(--nav-h) - var(--footer-h) - 48px);
+  max-height: calc(100dvh - var(--nav-h) - var(--footer-h) - 48px);
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+
+.wh-moment__text {
+  grid-area: text;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+  text-align: center;
+}
+.wh-moment__heading {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2rem, 3.2vw, 3.2rem);
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+.wh-moment__body {
+  font-size: 0.88rem;
+  line-height: 1.9;
+  max-width: 300px;
+}
+
+/* ── CTA ── text only, vertically centered */
+.wh-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--nav-h) 24px var(--footer-h);
+}
+.wh-cta__pre {
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 24px;
+}
+.wh-cta__title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 2.8vw, 2.6rem);
+  line-height: 1.35;
+  margin-bottom: 36px;
+  max-width: 520px;
+}
+.wh-cta__link {
+  font-size: 0.88rem;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid #111;
+  padding-bottom: 2px;
+  transition: opacity .2s;
+}
+.wh-cta__link:hover { opacity: .4; }
+
+/* ── Strip ── landscape photos at natural 4:3 ratio */
+.wh-strip {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.5vw, 24px);
+  padding: var(--nav-h) clamp(16px, 3vw, 40px) var(--footer-h);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.wh-strip::-webkit-scrollbar { display: none; }
+.wh-strip__item {
+  flex: 0 0 auto;
+  height: calc((100dvh - var(--nav-h) - var(--footer-h)) * 0.72);
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.wh-strip__item img {
   display: block;
   width: 100%;
   height: 100%;
+  /* Container is exactly 4:3, images are 4:3 → no cropping */
   object-fit: cover;
-}
-.obra a { display: block; overflow: hidden; transition: opacity .25s; }
-.obra a:hover { opacity: .85; }
-
-/* ── Individual image sizes */
-.obra__s23    { aspect-ratio: 3/4; width: calc((100vw - 2*var(--col-w)) / 3); }
-.obra__s23--xs { aspect-ratio: 3/4; width: calc((100vw - 2*var(--col-w)) / 3 * 0.9); }
-.obra__s23--l  { aspect-ratio: 3/4; width: calc((100vw - 2*var(--col-w)) / 3 * 1.05); }
-.obra__s32    { aspect-ratio: 3/2; width: calc((100vw - 2*var(--col-w)) * 0.6); }
-
-/* ── Fila 2: trio */
-.obra__trio {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 52px;
-  width: calc(100vw - 2*var(--col-w));
-}
-.obra__trio a { aspect-ratio: 3/4; }
-
-/* ── Fila 5: duo — both images same height, widths from ratio
-   H × (4/3 + 3/4) = H × 25/12 = ref_width - gap
-   H = (ref_width - gap) × 12/25   × 1.15 scale */
-.obra__duo {
-  display: flex;
-  align-items: center;
-  gap: var(--col-w);
-  overflow: visible;
-}
-.obra__duo a {
-  display: block;
-  overflow: hidden;
-  flex: 0 0 auto;
-  height: calc((100vw - 3*var(--col-w)) * 12 / 25 * 1.15);
-  transition: opacity .25s;
-}
-.obra__duo a:hover { opacity: .85; }
-.obra__duo--land { aspect-ratio: 4/3; width: auto; }
-.obra__duo--port { aspect-ratio: 3/4; width: auto; }
-.obra__duo img   { display: block; width: 100%; height: 100%; object-fit: cover; }
-
-/* ── Fila 6: XXL bleed — original width, section taller than viewport.
-   scroll-snap disabled on this section (JS toggles it). */
-.obra--bleed {
-  align-items: flex-start;
-  /* Same horizontal padding as other obras */
-  padding: 0 var(--col-w);
-  /* Height = image natural height + same top/bottom margin as other obras.
-     Other obras are 100vh with content centered → margin each side ≈ (100vh - img_h) / 2.
-     For bleed we add an explicit top and bottom gap equal to half a viewport
-     so the entry/exit feel identical to other rows. */
-  padding-top: calc(25vh - var(--nav-h) / 4);
-  padding-bottom: 25vh;
-  height: auto;
-  min-height: 100vh;
-}
-.obra__xxl {
-  aspect-ratio: 3/4;
-  width: calc((100vw - 2*var(--col-w)) * 1.05);
-  overflow: hidden;
-  flex-shrink: 0;
-}
-.obra__xxl img { display: block; width: 100%; height: 100%; object-fit: cover; }
-
-/* When snap is disabled on the gallery, free scroll is active */
-.index-gallery.snap-off {
-  scroll-snap-type: none;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -182,9 +324,6 @@ footer a:hover { opacity: .4; }
   background: #fff;
 }
 
-/* ── Thumb column (project-01, 02)
-   3 rows of 3:4 portrait, 2 thumbs per row.
-   3 × (w × 4/3) + 2 × gap = inner-h  →  w = (inner-h - 2×gap) / 4  */
 .project-thumbs {
   flex: 0 0 auto;
   height: var(--inner-h);
@@ -211,9 +350,6 @@ footer a:hover { opacity: .4; }
 }
 .thumb:hover img, .thumb.active img { opacity: .65; }
 
-/* ── project-03 thumb layout
-   Left col:  6 × 3:2  →  h = (inner-h - 5×gap)/6,  w = h×3/2
-   Right col: 3 × 2:3  →  h = (inner-h - 2×gap)/3,  w = h×2/3  */
 .project-thumbs--p03 {
   flex: 0 0 auto;
   height: var(--inner-h);
@@ -245,7 +381,6 @@ footer a:hover { opacity: .4; }
   aspect-ratio: 2/3;
 }
 
-/* ── Spacer + featured */
 .project-spacer { flex: 1 1 auto; }
 
 .project-featured {
@@ -267,13 +402,9 @@ footer a:hover { opacity: .4; }
 }
 .featured-box img.is-loading { opacity: 0; }
 
-/* project-03: restore 2:3 and 3:2 ratios */
 .p03 .featured-box.is-portrait  { aspect-ratio: 2/3; }
 .p03 .featured-box.is-landscape { aspect-ratio: 3/2; }
 
-/* project-04: 1 landscape (3:2) solo row + 7 portrait (2:3) thumbs, 4 rows
-   landscape_h + 4×portrait_h + 4×gap = inner-h, both share width w
-   w×2/3 + 4×(w×3/2) + 4×gap = inner-h  →  w = (inner-h - 4×gap) × 3/20 */
 .p04 .thumb              { width: calc((var(--inner-h) - 4*var(--gap)) * 3 / 20); }
 .p04 .thumb.is-portrait  { aspect-ratio: 2/3; }
 .p04 .thumb.is-landscape { aspect-ratio: 3/2; }
@@ -291,8 +422,6 @@ footer a:hover { opacity: .4; }
   padding: var(--margin);
   background: #fff;
 }
-
-/* Text: bottom-left, like thumb column lower area */
 .about-text {
   align-self: flex-end;
   padding-bottom: 0;
@@ -303,8 +432,6 @@ footer a:hover { opacity: .4; }
   line-height: 1.7;
   letter-spacing: .01em;
 }
-
-/* Portrait: same position/size as project featured viewer */
 .about-portrait {
   flex: 0 0 auto;
   height: var(--inner-h);
@@ -331,7 +458,7 @@ footer a:hover { opacity: .4; }
   padding-bottom: var(--margin);
 }
 .contact-layout a {
-  font-size: 1.5rem;   /* 50% larger than base (1rem = 14.3px → 1.5rem = 21.45px) */
+  font-size: 1.5rem;
   font-weight: 300;
   letter-spacing: .01em;
   border-bottom: 1px solid #111;
@@ -345,17 +472,17 @@ footer a:hover { opacity: .4; }
 ═══════════════════════════════════════════════════════════════════════════ */
 .impressum-layout {
   min-height: 100vh;
-  padding: calc(var(--nav-h) + var(--margin)) var(--margin) var(--margin);
+  padding: calc(var(--nav-h) + var(--margin)) var(--margin) calc(var(--footer-h) + var(--margin));
   max-width: 560px;
 }
 .impressum-layout h1 {
   font-size: 1.3rem;
-  font-weight: 500;
+  font-weight: 800;
   margin-bottom: 24px;
 }
 .impressum-layout h2 {
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 800;
   margin: 28px 0 8px;
 }
 .impressum-layout p {
@@ -367,141 +494,139 @@ footer a:hover { opacity: .4; }
 .impressum-layout a { border-bottom: 1px solid currentColor; transition: opacity .2s; }
 .impressum-layout a:hover { opacity: .4; }
 
-
 /* ═══════════════════════════════════════════════════════════════════════════
-   RESPONSIVE - TABLET (Landscape & Portrait up to 1024px)
+   RESPONSIVE — TABLET (max-width: 1024px)
 ═══════════════════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
   :root {
     --margin: 60px;
     --col-w: 8vw;
+    --wh-margin: 32px;
   }
-  .obra__trio {
-    gap: 20px;
-  }
-  .project-layout, .about-layout {
-    padding: var(--margin);
-  }
-  nav, footer {
-    padding: 0 24px;
-  }
-
-  /* Alturas dinámicas para centrado perfecto ignorando la UI de Safari/Chrome */
-  .index-gallery {
-    height: 100vh;
-    height: 100dvh;
-  }
-  .obra {
-    height: 100vh;
-    height: 100dvh;
-  }
-  .obra--bleed {
-    min-height: 100vh;
-    min-height: 100dvh;
-  }
+  .project-layout, .about-layout { padding: var(--margin); }
+  nav, footer { padding: 0 24px; }
+  .wh-trio { gap: 4px; }
+  .wh-moment__text { padding: 32px 24px; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   RESPONSIVE - MOBILE (max-width: 768px)
+   RESPONSIVE — MOBILE (max-width: 768px)
 ═══════════════════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
   :root {
     --margin: 24px;
-    --nav-h: 60px;
+    --nav-h: 52px;
     --footer-h: 40px;
+    --wh-margin: 20px;
   }
 
-  nav, footer {
-    padding: 0 20px;
+  nav, footer { padding: 0 20px; }
+  .nav-left { gap: 16px; }
+
+  /* ── Wedding home on mobile: natural scroll, no snap ── */
+  body.home { overflow-x: hidden; overflow-y: auto; }
+
+  .wh {
+    height: auto;
+    overflow-y: visible;
+    scroll-snap-type: none;
   }
 
-  /* --- INDEX GALLERY --- */
-  .obra {
-    padding: var(--nav-h) 20px var(--footer-h);
-  }
-  
-  /* Restricciones cruzadas de max-height y max-width para garantizar 
-     que nunca desbordan ni en vertical ni en horizontal (landscape) */
-  .obra__s23 { 
-    width: 85vw; 
-    max-height: calc(100vh - var(--nav-h) - 40px);
-    max-width: calc((100vh - var(--nav-h) - 40px) * 3 / 4);
-    max-height: calc(100dvh - var(--nav-h) - 40px);
-    max-width: calc((100dvh - var(--nav-h) - 40px) * 3 / 4);
-  }
-  .obra__s23--xs { 
-    width: 65vw; 
-    max-height: calc(80vh - var(--nav-h) - 40px);
-    max-width: calc((80vh - var(--nav-h) - 40px) * 3 / 4);
-    max-height: calc(80dvh - var(--nav-h) - 40px);
-    max-width: calc((80dvh - var(--nav-h) - 40px) * 3 / 4);
-  }
-  .obra__s23--l { 
-    width: 95vw; 
-    max-height: calc(100vh - var(--nav-h) - 20px);
-    max-width: calc((100vh - var(--nav-h) - 20px) * 3 / 4);
-    max-height: calc(100dvh - var(--nav-h) - 20px);
-    max-width: calc((100dvh - var(--nav-h) - 20px) * 3 / 4);
-  }
-  .obra__s32 { 
-    width: 95vw; 
-    max-height: calc(100vh - var(--nav-h) - 40px);
-    max-width: calc((100vh - var(--nav-h) - 40px) * 3 / 2);
-    max-height: calc(100dvh - var(--nav-h) - 40px);
-    max-width: calc((100dvh - var(--nav-h) - 40px) * 3 / 2);
+  .wh-hero,
+  .wh-intro,
+  .wh-trio,
+  .wh-based,
+  .wh-moment,
+  .wh-cta,
+  .wh-strip {
+    height: auto;
+    min-height: 100svh;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
   }
 
-  /* Trio: Scroll horizontal nativo */
-  .obra__trio {
-    display: flex;
-    width: 100vw;
+  /* Hero: keep full-screen on mobile, allow photo to scale */
+  .wh-hero { height: 100svh; }
+  .wh-hero img { max-width: 80%; }
+
+  /* Intro / Based / CTA: auto height */
+  .wh-intro,
+  .wh-based,
+  .wh-cta {
+    min-height: 0;
+    padding: calc(var(--nav-h) + 48px) 32px calc(var(--footer-h) + 48px);
+  }
+
+  /* Trio: horizontal scroll strip */
+  .wh-trio {
+    min-height: 0;
+    padding: var(--nav-h) 0 var(--footer-h);
     overflow-x: auto;
-    padding: 0 20px;
-    gap: 16px;
+    -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    height: 100svh;
   }
-  .obra__trio a {
-    flex: 0 0 75vw;
-    max-height: calc(100vh - var(--nav-h) - 40px);
-    max-height: calc(100dvh - var(--nav-h) - 40px);
+  .wh-trio__item {
+    flex: 0 0 78vw;
+    height: calc(100svh - var(--nav-h) - var(--footer-h));
     scroll-snap-align: center;
   }
 
-  /* Duo: Apilado vertical ajustado para no romper el aspecto horizontal */
-  .obra__duo {
-    flex-direction: column;
-    width: 100%;
-    gap: 16px;
-    justify-content: center;
-    align-items: center;
+  /* Moments: image stacks above text */
+  .wh-moment {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "img"
+      "text";
+    padding: var(--nav-h) 0 var(--footer-h);
   }
-  .obra__duo a {
-    width: 85vw;
+  .wh-moment--img-right {
+    grid-template-areas:
+      "img"
+      "text";
+  }
+  .wh-moment__img {
+    padding: 16px var(--wh-margin);
+    height: 58svh;
+  }
+  .wh-moment__img img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+  .wh-moment__text {
     height: auto;
-    max-height: calc((100vh - var(--nav-h) - 40px) / 2);
-    max-height: calc((100dvh - var(--nav-h) - 40px) / 2);
+    min-height: 0;
+    padding: 28px var(--wh-margin) 32px;
+  }
+  .wh-moment__body { max-width: 100%; }
+
+  /* Strip: horizontal scroll */
+  .wh-strip {
+    min-height: 0;
+    height: auto;
+    padding: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    gap: 4px;
+  }
+  .wh-strip__item {
+    flex: 0 0 85vw;
+    height: 56vw; /* 85vw at 4:3 ≈ 64vw, slightly taller crop */
+    scroll-snap-align: start;
   }
 
-  .obra--bleed {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .obra__xxl {
-    width: 100vw;
-  }
-
-  /* --- PROJECT PAGES --- */
+  /* ── Project pages ── */
   .project-layout {
     flex-direction: column;
     padding: calc(var(--nav-h) + 20px) 20px var(--footer-h);
     justify-content: flex-start;
   }
-  
   .project-featured {
     width: 100%;
     height: 55vh;
-    height: 55dvh;
     margin-bottom: 20px;
     justify-content: center;
   }
@@ -511,21 +636,11 @@ footer a:hover { opacity: .4; }
     display: flex;
     justify-content: center;
   }
-  .featured-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  .project-spacer {
-    display: none;
-  }
-
-  /* Thumbs: Wrapper flex centrado. 
-     Al ocupar 100% copia milimetricamente los márgenes del featured-box */
+  .featured-box img { width: 100%; height: 100%; object-fit: contain; }
+  .project-spacer { display: none; }
   .project-thumbs, .project-thumbs--p03 {
     flex-direction: row;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -533,16 +648,8 @@ footer a:hover { opacity: .4; }
     padding-bottom: 10px;
     gap: 10px;
   }
-  .thumb-row {
-    flex-direction: row;
-    justify-content: center;
-    gap: 10px;
-  }
-  .thumb {
-    width: auto;
-    height: 60px;
-  }
-
+  .thumb-row { flex-direction: row; justify-content: center; gap: 10px; }
+  .thumb { width: auto; height: 60px; }
   .thumb-col--land, .thumb-col--port {
     flex-direction: row;
     flex-wrap: wrap;
@@ -550,51 +657,33 @@ footer a:hover { opacity: .4; }
     height: auto;
     width: auto;
   }
-  .thumb-col--land .thumb, .thumb-col--port .thumb {
-    height: 60px;
-    width: auto;
-  }
-  .p04 .thumb {
-    height: 60px;
-    width: auto;
-  }
+  .thumb-col--land .thumb, .thumb-col--port .thumb { height: 60px; width: auto; }
+  .p04 .thumb { height: 60px; width: auto; }
 
-  /* --- ABOUT PAGE --- */
+  /* ── About page ── */
   .about-layout {
     position: static;
     flex-direction: column;
-    padding: calc(var(--nav-h) + 40px) 20px 40px;
+    padding: calc(var(--nav-h) + 40px) 20px calc(var(--footer-h) + 40px);
     height: auto;
     min-height: 100vh;
-    min-height: 100dvh;
     justify-content: flex-start;
     gap: 40px;
   }
   .about-portrait {
-    order: 1;
-    width: 100%;
-    height: auto;
-    justify-content: center;
+    order: 1; width: 100%; height: auto; justify-content: center;
   }
   .about-portrait img {
-    width: 100%;
-    height: auto;
-    max-height: 50vh;
-    max-height: 50dvh;
+    width: 100%; height: auto; max-height: 50vh;
   }
-  .about-text {
-    order: 2;
-    max-width: 100%;
-  }
+  .about-text { order: 2; max-width: 100%; }
 
-  /* --- CONTACT PAGE --- */
-  .contact-layout {
-    padding-bottom: 60px;
-  }
+  /* ── Contact page ── */
+  .contact-layout { padding-bottom: 60px; }
 
-  /* --- IMPRESSUM PAGE --- */
+  /* ── Impressum ── */
   .impressum-layout {
-    padding: calc(var(--nav-h) + 40px) 20px 40px;
+    padding: calc(var(--nav-h) + 40px) 20px calc(var(--footer-h) + 40px);
     max-width: 100%;
   }
 }

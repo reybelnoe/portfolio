@@ -3,91 +3,189 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Noemi Rey</title>
+  <title>Noemí Rey — Wedding Photographer in Ibiza</title>
+  <meta name="description" content="Noemí Rey, wedding photographer based in Ibiza. Documentary, warm, a little editorial. Honest and cinematic coverage of your day.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Noemi Rey — Photography">
-  <meta property="og:description" content="Photographer based in Berlin working at the intersection of still life and macro photography.">
+  <meta property="og:title" content="Noemí Rey — Wedding Photographer in Ibiza">
+  <meta property="og:description" content="Documentary wedding photography in Ibiza. Warm, cinematic, honest.">
   <meta property="og:url" content="https://noemirey.com/">
-  <meta property="og:image" content="https://noemirey.com/assets/project-04/frame_01.jpg">
+  <meta property="og:image" content="https://noemirey.com/assets/wedding/hero.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://noemirey.com/assets/project-04/frame_01.jpg">
+  <meta name="twitter:image" content="https://noemirey.com/assets/wedding/hero.jpg">
   <link rel="icon" href="assets/favicon.ico" sizes="48x48">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="home">
   <nav>
-    <a href="about.html">about</a>
-    <a href="index.html" class="nav-title">Noemi Rey</a>
-    <a href="contact.html">contact</a>
+    <div class="nav-left">
+      <a href="about.html">about</a>
+      <a href="contact.html">contact</a>
+    </div>
+    <a href="index.html" class="nav-title">Noemí Rey</a>
+    <div class="nav-right">
+      <span class="nav-lang">ES</span>
+    </div>
   </nav>
 
-  <main class="index-gallery">
+  <main class="wh">
 
-    <!-- 1. Single portrait, centrada -->
-    <section class="obra">
-      <a href="project-02.html" class="obra__s23">
-        <img src="assets/project-02/frame_04.jpg" alt="">
-      </a>
+    <!-- HERO -->
+    <section class="wh-hero">
+      <img
+        src="assets/wedding/hero.jpg"
+        srcset="assets/wedding/hero-sm.jpg 750w, assets/wedding/hero.jpg 1499w"
+        sizes="100vw"
+        alt="Bride and groom holding hands during the ring exchange at the outdoor ceremony"
+        width="1499" height="2000">
+      <h1 class="wh-hero__title"><em>Wedding photographer</em></h1>
     </section>
 
-    <!-- 2. Trío de portraits -->
-    <section class="obra">
-      <div class="obra__trio">
-        <a href="project-01.html"><img src="assets/project-01/frame_02.jpg" alt=""></a>
-        <a href="project-01.html"><img src="assets/project-01/frame_01.jpg" alt=""></a>
-        <a href="project-01.html"><img src="assets/project-01/frame_04.jpg" alt=""></a>
+    <!-- INTRO -->
+    <section class="wh-intro">
+      <p class="wh-intro__tagline">Warm, documentary, a little editorial.</p>
+      <p>I photograph weddings the way they actually unfold. I stay close, stay quiet, and wait for the moments nobody planned. When the light is right or a frame is worth setting up, I'll take a minute for it, but I won't turn your day into a photoshoot.</p>
+      <p>The result is honest and a bit cinematic: soft light, open shadows, warm colour with a film-like feel. I also work on film sets, which taught me to watch people who forget the camera is there.</p>
+    </section>
+
+    <!-- TRIO -->
+    <section class="wh-trio">
+      <div class="wh-trio__item">
+        <img
+          src="assets/wedding/trio-1.jpg"
+          srcset="assets/wedding/trio-1-sm.jpg 750w, assets/wedding/trio-1.jpg 1536w"
+          sizes="(max-width: 768px) 90vw, 32vw"
+          alt="Black and white portrait of the bride in lace dress, hair curled"
+          loading="lazy" width="1536" height="2048">
+      </div>
+      <div class="wh-trio__item">
+        <img
+          src="assets/wedding/trio-2.jpg"
+          srcset="assets/wedding/trio-2-sm.jpg 750w, assets/wedding/trio-2.jpg 1536w"
+          sizes="(max-width: 768px) 90vw, 32vw"
+          alt="Bride and groom walking out of the ceremony under a shower of white petals"
+          loading="lazy" width="1536" height="2048">
+      </div>
+      <div class="wh-trio__item">
+        <img
+          src="assets/wedding/trio-3.jpg"
+          srcset="assets/wedding/trio-3-sm.jpg 750w, assets/wedding/trio-3.jpg 1638w"
+          sizes="(max-width: 768px) 90vw, 32vw"
+          alt="Close-up of wedding dress lace detail in warm golden light"
+          loading="lazy" width="1638" height="2048">
       </div>
     </section>
 
-    <!-- 3. Landscape centrada -->
-    <section class="obra">
-      <a href="project-03.html" class="obra__s32">
-        <img src="assets/project-03/frame_01.jpg" alt="">
-      </a>
+    <!-- BASED IN IBIZA -->
+    <section class="wh-based">
+      <h2 class="wh-based__heading">Based in Ibiza</h2>
+      <p>I was born here, so I know how the light moves around the island and how to plan around it: golden hour at a shaded garden at midday, a villa after dark. I photograph weddings in Ibiza.</p>
     </section>
 
-    <!-- 4. Portrait xs centrada -->
-    <section class="obra">
-      <a href="#" class="obra__s23--xs">
-        <img src="assets/index/frame_01.jpg" alt="">
-      </a>
-    </section>
-
-    <!-- 5. Dúo landscape + portrait -->
-    <section class="obra">
-      <div class="obra__duo">
-        <a href="#" class="obra__duo--land"><img src="assets/index/frame_02.jpg" alt=""></a>
-        <a href="#" class="obra__duo--port"><img src="assets/index/frame_03.jpg" alt=""></a>
+    <!-- GETTING READY -->
+    <section class="wh-moment wh-moment--img-left">
+      <div class="wh-moment__img">
+        <img
+          src="assets/wedding/getting-ready.jpg"
+          srcset="assets/wedding/getting-ready-sm.jpg 750w, assets/wedding/getting-ready.jpg 1536w"
+          sizes="(max-width: 768px) 90vw, 45vw"
+          alt="Bride putting on earrings surrounded by bridesmaids, reflected in a large mirror"
+          loading="lazy" width="1536" height="2048">
+      </div>
+      <div class="wh-moment__text">
+        <h2 class="wh-moment__heading"><em>Getting ready</em></h2>
+        <p class="wh-moment__body">The quiet part of the day. Someone does her makeup, someone else fixes a hair clip, and nobody is performing yet. I keep to the edge of the room and let it happen.</p>
       </div>
     </section>
 
-    <!-- 6. Portrait XXL bleed -->
-    <section class="obra obra--bleed">
-      <a href="project-02.html" class="obra__xxl">
-        <img src="assets/project-02/frame_03.jpg" alt="">
-      </a>
+    <!-- CEREMONY -->
+    <section class="wh-moment wh-moment--img-right">
+      <div class="wh-moment__text">
+        <h2 class="wh-moment__heading"><em>Ceremony</em></h2>
+        <p class="wh-moment__body">The walk back down the aisle, under petals thrown by the people who came to see you. I'm most interested in this minute, when the vows are done and the two of you are still taking in what just happened.</p>
+      </div>
+      <div class="wh-moment__img">
+        <img
+          src="assets/wedding/ceremony.jpg"
+          srcset="assets/wedding/ceremony-sm.jpg 750w, assets/wedding/ceremony.jpg 1500w"
+          sizes="(max-width: 768px) 90vw, 45vw"
+          alt="Bride and groom walking out of the ceremony under a shower of white petals, she holds a bouquet of red and orange flowers"
+          loading="lazy" width="1500" height="2000">
+      </div>
     </section>
 
-    <!-- 7. Portrait l centrada -->
-    <section class="obra">
-      <a href="#" class="obra__s23--l">
-        <img src="assets/index/frame_04.jpg" alt="">
-      </a>
+    <!-- DINNER AND PARTY -->
+    <section class="wh-moment wh-moment--img-left">
+      <div class="wh-moment__img">
+        <img
+          src="assets/wedding/dinner-party.jpg"
+          srcset="assets/wedding/dinner-party-sm.jpg 750w, assets/wedding/dinner-party.jpg 1536w"
+          sizes="(max-width: 768px) 90vw, 45vw"
+          alt="Bride dancing at night with arms raised, fairy lights in the background"
+          loading="lazy" width="1536" height="2048">
+      </div>
+      <div class="wh-moment__text">
+        <h2 class="wh-moment__heading"><em>Dinner and party</em></h2>
+        <p class="wh-moment__body">After dark, I switch to direct flash on purpose. It gives that slightly vintage, old-party-snapshot look, with the light falling on whoever is doing something worth looking at. Here, a wedding gift being opened.</p>
+      </div>
     </section>
 
-    <!-- 8. Landscape centrada — The Ordinary -->
-    <section class="obra">
-      <a href="project-04.html" class="obra__s32">
-        <img src="assets/project-04/frame_01.jpg" alt="">
-      </a>
+    <!-- CTA -->
+    <section class="wh-cta">
+      <p class="wh-cta__pre">Getting married in Ibiza?</p>
+      <p class="wh-cta__title"><em>Tell me the date, the place, a little about the two of you.</em></p>
+      <a href="contact.html" class="wh-cta__link">Check availability</a>
     </section>
+
+    <!-- STRIP -->
+    <div class="wh-strip">
+      <div class="wh-strip__item">
+        <img
+          src="assets/wedding/strip-1.jpg"
+          srcset="assets/wedding/strip-1-sm.jpg 1000w, assets/wedding/strip-1.jpg 2048w"
+          sizes="(max-width: 768px) 80vw, 24vw"
+          alt="Bride doing her makeup reflected in a dressing room mirror"
+          loading="lazy" width="2048" height="1536">
+      </div>
+      <div class="wh-strip__item">
+        <img
+          src="assets/wedding/strip-2.jpg"
+          srcset="assets/wedding/strip-2-sm.jpg 1000w, assets/wedding/strip-2.jpg 2048w"
+          sizes="(max-width: 768px) 80vw, 24vw"
+          alt="Guest in black dress standing at an open window overlooking the garden"
+          loading="lazy" width="2048" height="1536">
+      </div>
+      <div class="wh-strip__item">
+        <img
+          src="assets/wedding/strip-4.jpg"
+          srcset="assets/wedding/strip-4-sm.jpg 1000w, assets/wedding/strip-4.jpg 2048w"
+          sizes="(max-width: 768px) 80vw, 24vw"
+          alt="Guest with purple hair relaxing on a bed in the villa bedroom"
+          loading="lazy" width="2048" height="1536">
+      </div>
+      <div class="wh-strip__item">
+        <img
+          src="assets/wedding/strip-5.jpg"
+          srcset="assets/wedding/strip-5-sm.jpg 1000w, assets/wedding/strip-5.jpg 2048w"
+          sizes="(max-width: 768px) 80vw, 24vw"
+          alt="Guest with purple hair applying lipstick in front of a mirror"
+          loading="lazy" width="2048" height="1536">
+      </div>
+      <div class="wh-strip__item">
+        <img
+          src="assets/wedding/strip-3.jpg"
+          srcset="assets/wedding/strip-3-sm.jpg 1000w, assets/wedding/strip-3.jpg 2048w"
+          sizes="(max-width: 768px) 80vw, 24vw"
+          alt="Couple seated together at the dinner table at night with floral centrepiece"
+          loading="lazy" width="2048" height="1536">
+      </div>
+    </div>
 
   </main>
 
   <footer>
-    <span>© 2026 Noemi Rey</span>
+    <span>© 2026 Noemí Rey</span>
     <a href="impressum.html">impressum</a>
   </footer>
 
