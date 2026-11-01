@@ -107,28 +107,30 @@ footer a:hover { opacity: .4; }
 
 /* ── Hero ── full-bleed photo + title overlay */
 .wh-hero {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: var(--nav-h);
+  padding-bottom: calc(var(--footer-h) + 12px);
   overflow: hidden;
 }
 .wh-hero img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 35%;
+  display: block;
+  width: auto;
+  height: auto;
+  /* leave room for title below */
+  max-height: calc(100dvh - var(--nav-h) - var(--footer-h) - clamp(3.5rem, 7vw, 8.5rem) - 40px);
+  max-width: 44%;
 }
 .wh-hero__title {
-  position: absolute;
-  bottom: calc(var(--footer-h) + 40px);
-  left: var(--wh-margin);
+  margin-top: auto;
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(3rem, 5.5vw, 5.5rem);
+  font-size: clamp(3.5rem, 7vw, 8.5rem);
+  text-align: center;
+  line-height: 1;
   color: #111;
-  line-height: 1.05;
-  z-index: 1;
 }
 
 /* ── Intro ── text only, vertically centered */
@@ -540,8 +542,9 @@ footer a:hover { opacity: .4; }
     scroll-snap-stop: normal;
   }
 
-  /* Hero: keep full-screen */
+  /* Hero: keep full-screen on mobile, allow photo to scale */
   .wh-hero { height: 100svh; }
+  .wh-hero img { max-width: 80%; }
 
   /* Intro / Based / CTA: auto height */
   .wh-intro,
