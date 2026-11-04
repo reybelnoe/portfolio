@@ -17,7 +17,7 @@
     'intro.p2': 'El resultado es honesto y un poco cinematográfico: luz suave, sombras abiertas, color cálido con aspecto de película. También trabajo en rodajes de cine, lo que me enseñó a observar a la gente cuando se olvida de que la cámara está ahí.',
 
     'based.heading': 'Con base en Ibiza',
-    'based.p': 'Nací aquí, así que sé cómo se mueve la luz por la isla y cómo planificar en torno a ella: la hora dorada en la costa, un jardín con sombra al mediodía, una villa de noche. Fotografío bodas en Ibiza.',
+    'based.p': 'Nací aquí, así que sé cómo se mueve la luz por la isla y cómo planificar en torno a ella: la hora dorada en la costa, un jardín con sombra al mediodía, una villa de noche.',
 
     'ready.title': 'Preparativos',
     'ready.p': 'La parte tranquila del día. Alguien se maquilla, otra persona se arregla una horquilla y todavía nadie actúa. Me quedo en un borde de la habitación y dejo que ocurra.',
