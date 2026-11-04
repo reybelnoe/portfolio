@@ -19,19 +19,19 @@
 <body>
   <nav>
     <div class="nav-left">
-      <a href="about.html">about</a>
-      <a href="contact.html">contact</a>
+      <a href="about.html" data-i18n="nav.about">about</a>
+      <a href="contact.html" data-i18n="nav.contact">contact</a>
     </div>
     <a href="index.html" class="nav-title">Noemí Rey</a>
     <div class="nav-right">
-      <span class="nav-lang">ES</span>
+      <button type="button" class="nav-lang" id="lang-toggle" lang="es" aria-label="Cambiar a español">ES</button>
     </div>
   </nav>
 
   <main class="about-layout">
     <div class="about-text">
-      <p>I’m Noemi Rey. I’ve been drawn to photography, stories and cinema since I was very young, and I studied photography at EASD in Valencia.</p>
-      <p>What I love about photography isn’t the single image. It’s what happens when images sit next to each other: alone, a photograph says one thing; together, they start to tell a story. A wedding is made of that kind of moment, small things that only mean something in sequence. I try to photograph the day so the gallery reads as one story, from the first moments of the morning to the party.</p>
+      <p data-i18n="about.p1">I’m Noemi Rey. I’ve been drawn to photography, stories and cinema since I was very young, and I studied photography at EASD in Valencia.</p>
+      <p data-i18n="about.p2">What I love about photography isn’t the single image. It’s what happens when images sit next to each other: alone, a photograph says one thing; together, they start to tell a story. A wedding is made of that kind of moment, small things that only mean something in sequence. I try to photograph the day so the gallery reads as one story, from the first moments of the morning to the party.</p>
     </div>
     <div class="about-portrait">
       <img src="assets/index/portrait.jpg" alt="Noemi Rey">
@@ -40,7 +40,9 @@
 
   <footer>
     <span>© 2026 Noemi Rey</span>
-    <a href="impressum.html">impressum</a>
+    <a href="impressum.html" data-i18n="footer.impressum">impressum</a>
   </footer>
+
+  <script src="lang.js" defer></script>
 </body>
 </html>

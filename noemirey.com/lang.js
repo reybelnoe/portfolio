@@ -1,16 +1,19 @@
-/* Selector de idioma de la home: EN (por defecto) ↔ ES.
+/* Selector de idioma (home y about): EN (por defecto) ↔ ES.
    - Los textos con data-i18n="clave" y los alt con data-i18n-alt="clave"
      se sustituyen por su traducción; el original en inglés se guarda para volver.
    - El título principal (h1 "Wedding photographer") no lleva data-i18n: no se traduce.
    - La elección se recuerda en localStorage (si el navegador lo permite). */
 (function () {
   const ES = {
-    'doc.title': 'Noemí Rey — Fotógrafa de bodas en Ibiza',
-    'doc.description': 'Noemí Rey, fotógrafa de bodas con base en Ibiza. Documental, cálida, un poco editorial. Cobertura honesta y cinematográfica de tu día.',
+    'home.title': 'Noemí Rey — Fotógrafa de bodas en Ibiza',
+    'home.description': 'Noemí Rey, fotógrafa de bodas con base en Ibiza. Documental, cálida, un poco editorial. Cobertura honesta y cinematográfica de tu día.',
 
     'nav.about': 'sobre mí',
     'nav.contact': 'contacto',
     'footer.impressum': 'aviso legal',
+
+    'about.p1': 'Soy Noemi Rey. Desde muy joven me han atraído la fotografía, las historias y el cine, y estudié fotografía en la EASD de Valencia.',
+    'about.p2': 'Lo que más me gusta de la fotografía no es la imagen suelta, sino lo que ocurre cuando las imágenes se colocan unas junto a otras: sola, una fotografía dice una cosa; juntas, empiezan a contar una historia. Una boda está hecha de ese tipo de momentos, pequeñas cosas que solo significan algo en secuencia. Intento fotografiar el día de modo que la galería se lea como una sola historia, desde los primeros momentos de la mañana hasta la fiesta.',
 
     'intro.tagline': 'Cálida, documental, un poco editorial.',
     'intro.p1': 'Fotografío las bodas tal y como suceden. Me quedo cerca, en silencio, y espero a los momentos que nadie ha planeado. Cuando la luz es la adecuada o un encuadre merece prepararse, me tomo un minuto para ello, pero no voy a convertir tu día en una sesión de fotos.',
@@ -51,6 +54,11 @@
   const textEls = document.querySelectorAll('[data-i18n]');
   const altEls = document.querySelectorAll('[data-i18n-alt]');
   const metaDesc = document.querySelector('meta[name="description"]');
+  /* Título y descripción solo se traducen en las páginas que tienen claves
+     '<página>.title' / '<página>.description' (ahora solo la home). */
+  const page = document.body.dataset.page;
+  const esTitle = page && ES[page + '.title'];
+  const esDesc = page && ES[page + '.description'];
   const original = {
     title: document.title,
     description: metaDesc ? metaDesc.getAttribute('content') : ''
@@ -64,8 +72,8 @@
     textEls.forEach(el => { el.textContent = es ? ES[el.dataset.i18n] : el.dataset.en; });
     altEls.forEach(el => { el.setAttribute('alt', es ? ES[el.dataset.i18nAlt] : el.dataset.enAlt); });
     document.documentElement.lang = es ? 'es' : 'en';
-    document.title = es ? ES['doc.title'] : original.title;
-    if (metaDesc) metaDesc.setAttribute('content', es ? ES['doc.description'] : original.description);
+    if (esTitle) document.title = es ? esTitle : original.title;
+    if (metaDesc && esDesc) metaDesc.setAttribute('content', es ? esDesc : original.description);
     btn.textContent = es ? 'EN' : 'ES';
     btn.setAttribute('aria-label', es ? 'Switch to English' : 'Cambiar a español');
     btn.setAttribute('lang', es ? 'en' : 'es');
