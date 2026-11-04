@@ -20,12 +20,12 @@
 <body class="home">
   <nav>
     <div class="nav-left">
-      <a href="about.html">about</a>
-      <a href="contact.html">contact</a>
+      <a href="about.html" data-i18n="nav.about">about</a>
+      <a href="contact.html" data-i18n="nav.contact">contact</a>
     </div>
     <a href="index.html" class="nav-title">Noemí Rey</a>
     <div class="nav-right">
-      <span class="nav-lang">ES</span>
+      <button type="button" class="nav-lang" id="lang-toggle" lang="es" aria-label="Cambiar a español">ES</button>
     </div>
   </nav>
 
@@ -37,16 +37,16 @@
         src="assets/wedding/hero.jpg"
         srcset="assets/wedding/hero-sm.jpg 750w, assets/wedding/hero.jpg 1499w"
         sizes="100vw"
-        alt="Bride and groom holding hands during the ring exchange at the outdoor ceremony"
+        alt="Bride and groom holding hands during the ring exchange at the outdoor ceremony" data-i18n-alt="alt.hero"
         width="1499" height="2000">
       <h1 class="wh-hero__title"><em>Wedding photographer</em></h1>
     </section>
 
     <!-- INTRO -->
     <section class="wh-intro">
-      <p class="wh-intro__tagline">Warm, documentary, a little editorial.</p>
-      <p>I photograph weddings the way they actually unfold. I stay close, stay quiet, and wait for the moments nobody planned. When the light is right or a frame is worth setting up, I'll take a minute for it, but I won't turn your day into a photoshoot.</p>
-      <p>The result is honest and a bit cinematic: soft light, open shadows, warm colour with a film-like feel. I also work on film sets, which taught me to watch people who forget the camera is there.</p>
+      <p class="wh-intro__tagline" data-i18n="intro.tagline">Warm, documentary, a little editorial.</p>
+      <p data-i18n="intro.p1">I photograph weddings the way they actually unfold. I stay close, stay quiet, and wait for the moments nobody planned. When the light is right or a frame is worth setting up, I'll take a minute for it, but I won't turn your day into a photoshoot.</p>
+      <p data-i18n="intro.p2">The result is honest and a bit cinematic: soft light, open shadows, warm colour with a film-like feel. I also work on film sets, which taught me to watch people who forget the camera is there.</p>
     </section>
 
     <!-- TRIO -->
@@ -56,7 +56,7 @@
           src="assets/wedding/trio-1.jpg"
           srcset="assets/wedding/trio-1-sm.jpg 750w, assets/wedding/trio-1.jpg 1536w"
           sizes="(max-width: 768px) 90vw, 32vw"
-          alt="Black and white portrait of the bride in lace dress, hair curled"
+          alt="Black and white portrait of the bride in lace dress, hair curled" data-i18n-alt="alt.trio1"
           loading="lazy" width="1536" height="2048">
       </div>
       <div class="wh-trio__item">
@@ -64,7 +64,7 @@
           src="assets/wedding/trio-2.jpg"
           srcset="assets/wedding/trio-2-sm.jpg 750w, assets/wedding/trio-2.jpg 1536w"
           sizes="(max-width: 768px) 90vw, 32vw"
-          alt="Bride and groom walking out of the ceremony under a shower of white petals"
+          alt="Bride and groom walking out of the ceremony under a shower of white petals" data-i18n-alt="alt.trio2"
           loading="lazy" width="1536" height="2048">
       </div>
       <div class="wh-trio__item">
@@ -72,15 +72,15 @@
           src="assets/wedding/trio-3.jpg"
           srcset="assets/wedding/trio-3-sm.jpg 750w, assets/wedding/trio-3.jpg 1638w"
           sizes="(max-width: 768px) 90vw, 32vw"
-          alt="Close-up of wedding dress lace detail in warm golden light"
+          alt="Close-up of wedding dress lace detail in warm golden light" data-i18n-alt="alt.trio3"
           loading="lazy" width="1638" height="2048">
       </div>
     </section>
 
     <!-- BASED IN IBIZA -->
     <section class="wh-based">
-      <h2 class="wh-based__heading">Based in Ibiza</h2>
-      <p>I was born here, so I know how the light moves around the island and how to plan around it: golden hour at a shaded garden at midday, a villa after dark. I photograph weddings in Ibiza.</p>
+      <h2 class="wh-based__heading" data-i18n="based.heading">Based in Ibiza</h2>
+      <p data-i18n="based.p">I was born here, so I know how the light moves around the island and how to plan around it: golden hour at a shaded garden at midday, a villa after dark. I photograph weddings in Ibiza.</p>
     </section>
 
     <!-- GETTING READY -->
@@ -90,27 +90,27 @@
           src="assets/wedding/getting-ready.jpg"
           srcset="assets/wedding/getting-ready-sm.jpg 750w, assets/wedding/getting-ready.jpg 1536w"
           sizes="(max-width: 768px) 90vw, 45vw"
-          alt="Bride putting on earrings surrounded by bridesmaids, reflected in a large mirror"
+          alt="Bride putting on earrings surrounded by bridesmaids, reflected in a large mirror" data-i18n-alt="alt.ready"
           loading="lazy" width="1536" height="2048">
       </div>
       <div class="wh-moment__text">
-        <h2 class="wh-moment__heading"><em>Getting ready</em></h2>
-        <p class="wh-moment__body">The quiet part of the day. Someone does her makeup, someone else fixes a hair clip, and nobody is performing yet. I keep to the edge of the room and let it happen.</p>
+        <h2 class="wh-moment__heading"><em data-i18n="ready.title">Getting ready</em></h2>
+        <p class="wh-moment__body" data-i18n="ready.p">The quiet part of the day. Someone does her makeup, someone else fixes a hair clip, and nobody is performing yet. I keep to the edge of the room and let it happen.</p>
       </div>
     </section>
 
     <!-- CEREMONY -->
     <section class="wh-moment wh-moment--img-right">
       <div class="wh-moment__text">
-        <h2 class="wh-moment__heading"><em>Ceremony</em></h2>
-        <p class="wh-moment__body">The walk back down the aisle, under petals thrown by the people who came to see you. I'm most interested in this minute, when the vows are done and the two of you are still taking in what just happened.</p>
+        <h2 class="wh-moment__heading"><em data-i18n="ceremony.title">Ceremony</em></h2>
+        <p class="wh-moment__body" data-i18n="ceremony.p">The walk back down the aisle, under petals thrown by the people who came to see you. I'm most interested in this minute, when the vows are done and the two of you are still taking in what just happened.</p>
       </div>
       <div class="wh-moment__img">
         <img
           src="assets/wedding/ceremony.jpg"
           srcset="assets/wedding/ceremony-sm.jpg 750w, assets/wedding/ceremony.jpg 1500w"
           sizes="(max-width: 768px) 90vw, 45vw"
-          alt="Bride and groom walking out of the ceremony under a shower of white petals, she holds a bouquet of red and orange flowers"
+          alt="Bride and groom walking out of the ceremony under a shower of white petals, she holds a bouquet of red and orange flowers" data-i18n-alt="alt.ceremony"
           loading="lazy" width="1500" height="2000">
       </div>
     </section>
@@ -122,20 +122,20 @@
           src="assets/wedding/dinner-party.jpg"
           srcset="assets/wedding/dinner-party-sm.jpg 750w, assets/wedding/dinner-party.jpg 1536w"
           sizes="(max-width: 768px) 90vw, 45vw"
-          alt="Bride dancing at night with arms raised, fairy lights in the background"
+          alt="Bride dancing at night with arms raised, fairy lights in the background" data-i18n-alt="alt.party"
           loading="lazy" width="1536" height="2048">
       </div>
       <div class="wh-moment__text">
-        <h2 class="wh-moment__heading"><em>Dinner and party</em></h2>
-        <p class="wh-moment__body">After dark, I switch to direct flash on purpose. It gives that slightly vintage, old-party-snapshot look, with the light falling on whoever is doing something worth looking at. Here, a wedding gift being opened.</p>
+        <h2 class="wh-moment__heading"><em data-i18n="party.title">Dinner and party</em></h2>
+        <p class="wh-moment__body" data-i18n="party.p">After dark, I switch to direct flash on purpose. It gives that slightly vintage, old-party-snapshot look, with the light falling on whoever is doing something worth looking at. Here, a wedding gift being opened.</p>
       </div>
     </section>
 
     <!-- CTA -->
     <section class="wh-cta">
-      <p class="wh-cta__pre">Getting married in Ibiza?</p>
-      <p class="wh-cta__title"><em>Tell me the date, the place, a little about the two of you.</em></p>
-      <a href="contact.html" class="wh-cta__link">Check availability</a>
+      <p class="wh-cta__pre" data-i18n="cta.pre">Getting married in Ibiza?</p>
+      <p class="wh-cta__title"><em data-i18n="cta.title">Tell me the date, the place, a little about the two of you.</em></p>
+      <a href="contact.html" class="wh-cta__link" data-i18n="cta.link">Check availability</a>
     </section>
 
     <!-- STRIP -->
@@ -145,7 +145,7 @@
           src="assets/wedding/strip-1.jpg"
           srcset="assets/wedding/strip-1-sm.jpg 1000w, assets/wedding/strip-1.jpg 2048w"
           sizes="(max-width: 768px) 80vw, 24vw"
-          alt="Bride doing her makeup reflected in a dressing room mirror"
+          alt="Bride doing her makeup reflected in a dressing room mirror" data-i18n-alt="alt.strip1"
           loading="lazy" width="2048" height="1536">
       </div>
       <div class="wh-strip__item">
@@ -153,7 +153,7 @@
           src="assets/wedding/strip-2.jpg"
           srcset="assets/wedding/strip-2-sm.jpg 1000w, assets/wedding/strip-2.jpg 2048w"
           sizes="(max-width: 768px) 80vw, 24vw"
-          alt="Guest in black dress standing at an open window overlooking the garden"
+          alt="Guest in black dress standing at an open window overlooking the garden" data-i18n-alt="alt.strip2"
           loading="lazy" width="2048" height="1536">
       </div>
       <div class="wh-strip__item">
@@ -161,7 +161,7 @@
           src="assets/wedding/strip-4.jpg"
           srcset="assets/wedding/strip-4-sm.jpg 1000w, assets/wedding/strip-4.jpg 2048w"
           sizes="(max-width: 768px) 80vw, 24vw"
-          alt="Guest with purple hair relaxing on a bed in the villa bedroom"
+          alt="Guest with purple hair relaxing on a bed in the villa bedroom" data-i18n-alt="alt.strip3"
           loading="lazy" width="2048" height="1536">
       </div>
       <div class="wh-strip__item">
@@ -169,7 +169,7 @@
           src="assets/wedding/strip-5.jpg"
           srcset="assets/wedding/strip-5-sm.jpg 1000w, assets/wedding/strip-5.jpg 2048w"
           sizes="(max-width: 768px) 80vw, 24vw"
-          alt="Guest with purple hair applying lipstick in front of a mirror"
+          alt="Guest with purple hair applying lipstick in front of a mirror" data-i18n-alt="alt.strip4"
           loading="lazy" width="2048" height="1536">
       </div>
       <div class="wh-strip__item">
@@ -177,7 +177,7 @@
           src="assets/wedding/strip-3.jpg"
           srcset="assets/wedding/strip-3-sm.jpg 1000w, assets/wedding/strip-3.jpg 2048w"
           sizes="(max-width: 768px) 80vw, 24vw"
-          alt="Couple seated together at the dinner table at night with floral centrepiece"
+          alt="Couple seated together at the dinner table at night with floral centrepiece" data-i18n-alt="alt.strip5"
           loading="lazy" width="2048" height="1536">
       </div>
     </div>
@@ -186,9 +186,10 @@
 
   <footer>
     <span>© 2026 Noemí Rey</span>
-    <a href="impressum.html">impressum</a>
+    <a href="impressum.html" data-i18n="footer.impressum">impressum</a>
   </footer>
 
   <script src="gallery.js"></script>
+  <script src="lang.js" defer></script>
 </body>
 </html>
