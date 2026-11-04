@@ -310,6 +310,31 @@ footer a:hover { opacity: .4; }
   object-fit: cover;
 }
 
+/* ── Desktop: secciones de texto/trío más cortas (ajuste hecho en Design) ──
+   Medidas de referencia a 1440×900: intro 280 · trío 680 · ibiza 230 · cta 360.
+   Estas secciones fluyen con la altura de su contenido y no hacen snap; las
+   de pantalla completa (hero, momentos, tira) siguen haciendo snap.        */
+@media (min-width: 769px) {
+  .wh { scroll-snap-type: y proximity; }
+
+  .wh-hero__title { bottom: calc(var(--footer-h) + 66px); }
+
+  .wh-intro,
+  .wh-trio,
+  .wh-based,
+  .wh-cta {
+    height: auto;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+  }
+
+  .wh-intro { padding-top: 20px; padding-bottom: 21px; }
+  .wh-trio  { padding-top: 55px; padding-bottom: 56px; }
+  .wh-trio__item { height: auto; }
+  .wh-based { padding-top: 53px; padding-bottom: 54px; }
+  .wh-cta   { padding-top: 81px; padding-bottom: 82px; }
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    PROJECT PAGES — fixed full-viewport frame, no scroll
 ═══════════════════════════════════════════════════════════════════════════ */
