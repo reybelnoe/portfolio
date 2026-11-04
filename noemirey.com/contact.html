@@ -16,27 +16,120 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-page="contact">
 
   <nav>
     <div class="nav-left">
-      <a href="about.html">about</a>
-      <a href="contact.html">contact</a>
+      <a href="about.html" data-i18n="nav.about">about</a>
+      <a href="contact.html" data-i18n="nav.contact">contact</a>
     </div>
     <a href="index.html" class="nav-title">Noemí Rey</a>
     <div class="nav-right">
-      <span class="nav-lang">ES</span>
+      <button type="button" class="nav-lang" id="lang-toggle" lang="es" aria-label="Cambiar a español">ES</button>
     </div>
   </nav>
 
-  <main class="contact-layout">
-    <a href="mailto:photo@noemirey.com">photo@noemirey.com</a>
+  <main class="contact">
+    <form id="contact-form" class="cform" action="https://api.web3forms.com/submit" method="POST">
+
+      <!-- Web3Forms: la clave de acceso es pública por diseño -->
+      <input type="hidden" name="access_key" value="627aefcb-da18-4a9b-b1ec-1cc75b36b7f4">
+      <input type="hidden" name="subject" value="New wedding enquiry — noemirey.com">
+      <input type="hidden" name="from_name" value="noemirey.com">
+      <!-- Anti-spam: los humanos no lo ven ni lo marcan -->
+      <input type="checkbox" name="botcheck" class="cform__trap" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="cform__row">
+        <div class="cform__field">
+          <label for="f-name" data-i18n="contact.name">Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="cform__field">
+          <label for="f-email" data-i18n="contact.email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required>
+        </div>
+      </div>
+
+      <div class="cform__row">
+        <div class="cform__field">
+          <label for="f-date" data-i18n="contact.date">Wedding date</label>
+          <input id="f-date" name="wedding_date" type="date">
+          <label class="cform__check cform__check--small">
+            <input type="checkbox" name="date_unknown" id="f-date-unknown">
+            <span data-i18n="contact.unknown">I don't know yet</span>
+          </label>
+        </div>
+        <div class="cform__field">
+          <label for="f-venue" data-i18n="contact.venue">Venue or area</label>
+          <input id="f-venue" name="venue" type="text">
+          <label class="cform__check cform__check--small">
+            <input type="checkbox" name="venue_unknown" id="f-venue-unknown">
+            <span data-i18n="contact.unknown">I don't know yet</span>
+          </label>
+        </div>
+      </div>
+
+      <fieldset class="cform__group">
+        <legend data-i18n="contact.coverage">Coverage</legend>
+        <label class="cform__check cform__check--option">
+          <input type="radio" name="coverage" value="8 hours">
+          <span><strong data-i18n="contact.cov8.t">8 hours</strong> <span class="cform__desc" data-i18n="contact.cov8.d">Getting ready, ceremony, cocktail hour and dinner.</span></span>
+        </label>
+        <label class="cform__check cform__check--option">
+          <input type="radio" name="coverage" value="10 hours">
+          <span><strong data-i18n="contact.cov10.t">10 hours</strong> <span class="cform__desc" data-i18n="contact.cov10.d">Adds the first dance and the start of the party.</span></span>
+        </label>
+        <label class="cform__check cform__check--option">
+          <input type="radio" name="coverage" value="14 hours">
+          <span><strong data-i18n="contact.cov14.t">14 hours</strong> <span class="cform__desc" data-i18n="contact.cov14.d">The full day, from morning preparations to late in the party.</span></span>
+        </label>
+        <label class="cform__check cform__check--option">
+          <input type="radio" name="coverage" value="Not sure yet">
+          <span><strong data-i18n="contact.covq.t">Not sure yet</strong> <span class="cform__desc" data-i18n="contact.covq.d">Tell me about your day and I’ll suggest what fits.</span></span>
+        </label>
+      </fieldset>
+
+      <fieldset class="cform__group">
+        <legend data-i18n="contact.extras">Anything else you’d like covered?</legend>
+        <label class="cform__check cform__check--small">
+          <input type="checkbox" name="extras" value="Welcome party or day before">
+          <span data-i18n="contact.extra1">Welcome party or day before</span>
+        </label>
+        <label class="cform__check cform__check--small">
+          <input type="checkbox" name="extras" value="Day-after brunch or pool party">
+          <span data-i18n="contact.extra2">Day-after brunch or pool party</span>
+        </label>
+      </fieldset>
+
+      <div class="cform__field">
+        <label for="f-message" data-i18n="contact.message">Message</label>
+        <textarea id="f-message" name="message" rows="4"></textarea>
+      </div>
+
+      <div class="cform__field">
+        <label for="f-found" data-i18n="contact.found">How did you find me?</label>
+        <input id="f-found" name="how_found" type="text">
+      </div>
+
+      <div class="cform__actions">
+        <button type="submit" class="cform__send" data-i18n="contact.send">Send</button>
+        <p class="cform__status" id="status-sending" role="status" hidden data-i18n="contact.sending">Sending…</p>
+        <p class="cform__status" id="status-sent" role="status" hidden data-i18n="contact.sent">Thank you, your message has been sent. I’ll get back to you soon.</p>
+        <p class="cform__status cform__status--error" id="status-error" role="alert" hidden>
+          <span data-i18n="contact.error">Your message couldn’t be sent. Please try again, or write to</span>
+          <a href="mailto:photo@noemirey.com">photo@noemirey.com</a>
+        </p>
+      </div>
+
+    </form>
   </main>
 
   <footer>
     <span>© 2026 Noemi Rey</span>
-    <a href="impressum.html">impressum</a>
+    <a href="impressum.html" data-i18n="footer.impressum">impressum</a>
   </footer>
 
+  <script src="lang.js" defer></script>
+  <script src="contact.js" defer></script>
 </body>
 </html>

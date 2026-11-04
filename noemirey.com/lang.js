@@ -1,4 +1,4 @@
-/* Selector de idioma (home y about): EN (por defecto) ↔ ES.
+/* Selector de idioma (home, about y contact): EN (por defecto) ↔ ES.
    - Los textos con data-i18n="clave" y los alt con data-i18n-alt="clave"
      se sustituyen por su traducción; el original en inglés se guarda para volver.
    - El título principal (h1 "Wedding photographer") no lleva data-i18n: no se traduce.
@@ -11,6 +11,30 @@
     'nav.about': 'sobre mí',
     'nav.contact': 'contacto',
     'footer.impressum': 'aviso legal',
+
+    'contact.name': 'Nombre',
+    'contact.email': 'Correo electrónico',
+    'contact.date': 'Fecha de la boda',
+    'contact.venue': 'Lugar o zona',
+    'contact.unknown': 'Aún no lo sé',
+    'contact.coverage': 'Cobertura',
+    'contact.cov8.t': '8 horas',
+    'contact.cov8.d': 'Preparativos, ceremonia, cóctel y cena.',
+    'contact.cov10.t': '10 horas',
+    'contact.cov10.d': 'Añade el primer baile y el inicio de la fiesta.',
+    'contact.cov14.t': '14 horas',
+    'contact.cov14.d': 'El día completo, desde los preparativos de la mañana hasta bien entrada la fiesta.',
+    'contact.covq.t': 'Aún no lo sé',
+    'contact.covq.d': 'Cuéntame cómo es vuestro día y te sugeriré lo que mejor encaje.',
+    'contact.extras': '¿Quieres que cubra algo más?',
+    'contact.extra1': 'Fiesta de bienvenida o el día antes',
+    'contact.extra2': 'Brunch o fiesta en la piscina del día después',
+    'contact.message': 'Mensaje',
+    'contact.found': '¿Cómo me encontraste?',
+    'contact.send': 'Enviar',
+    'contact.sending': 'Enviando…',
+    'contact.sent': 'Gracias, tu mensaje se ha enviado. Te responderé pronto.',
+    'contact.error': 'No se ha podido enviar tu mensaje. Inténtalo de nuevo o escribe a',
 
     'about.p1': 'Soy Noemi Rey. Desde muy joven me han atraído la fotografía, las historias y el cine, y estudié fotografía en la EASD de Valencia.',
     'about.p2': 'Lo que más me gusta de la fotografía no es la imagen suelta, sino lo que ocurre cuando las imágenes se colocan unas junto a otras: sola, una fotografía dice una cosa; juntas, empiezan a contar una historia. Una boda está hecha de ese tipo de momentos, pequeñas cosas que solo significan algo en secuencia. Intento fotografiar el día de modo que la galería se lea como una sola historia, desde los primeros momentos de la mañana hasta la fiesta.',

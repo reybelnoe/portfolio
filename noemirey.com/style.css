@@ -474,23 +474,93 @@ footer a:hover { opacity: .4; }
 /* ═══════════════════════════════════════════════════════════════════════════
    CONTACT
 ═══════════════════════════════════════════════════════════════════════════ */
-.contact-layout {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: var(--margin);
+.contact {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: calc(var(--nav-h) + 56px) 32px calc(var(--footer-h) + 56px);
 }
-.contact-layout a {
-  font-size: 1.5rem;
-  font-weight: 300;
-  letter-spacing: .01em;
+.cform { display: flex; flex-direction: column; gap: 28px; }
+.cform__row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 56px; }
+.cform__field { display: flex; flex-direction: column; min-width: 0; }
+.cform label,
+.cform legend { font-size: 13px; letter-spacing: .01em; }
+.cform input[type="text"],
+.cform input[type="email"],
+.cform input[type="date"],
+.cform textarea {
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px 0 8px;
+  border: 0;
   border-bottom: 1px solid #111;
-  padding-bottom: 2px;
+  border-radius: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  color: #111;
+  outline: none;
+}
+.cform input[type="text"],
+.cform input[type="email"],
+.cform input[type="date"] { height: 40px; }
+.cform input:focus-visible,
+.cform textarea:focus-visible { border-bottom-width: 2px; padding-bottom: 7px; }
+.cform input:disabled { opacity: .35; }
+.cform textarea { resize: vertical; min-height: 96px; line-height: 1.6; }
+
+.cform__group { border: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.cform__group legend { margin-bottom: 4px; padding: 0; }
+
+/* Casillas y radios con forma de círculo (siguen siendo input nativos) */
+.cform__check { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; line-height: 1.5; }
+.cform__check--small { font-size: 12px; margin-top: 8px; }
+.cform__group .cform__check--small { margin-top: 0; }
+.cform__check--option { font-size: 13px; }
+.cform__check input {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  margin: 3px 0 0;
+  border: 1px solid #777;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+}
+.cform__check input:checked { border-color: #111; }
+.cform__check input:checked::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: #111;
+}
+.cform__check input:focus-visible { outline: 1px solid #111; outline-offset: 3px; }
+.cform__desc { color: #555; }
+.cform__check strong { font-weight: 500; }
+
+.cform__actions { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 8px; }
+.cform__send {
+  background: none;
+  border: 0;
+  border-bottom: 1px solid #111;
+  padding: 0 0 2px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: #111;
+  cursor: pointer;
   transition: opacity .2s;
 }
-.contact-layout a:hover { opacity: .4; }
+.cform__send:hover { opacity: .4; }
+.cform__send:disabled { opacity: .35; cursor: default; }
+.cform__send:focus-visible { outline: 1px solid #111; outline-offset: 4px; }
+.cform__status { font-size: 13px; text-align: center; max-width: 520px; }
+.cform__status[hidden] { display: none; }
+.cform__status a { border-bottom: 1px solid #111; }
+.cform__trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    IMPRESSUM
@@ -704,7 +774,8 @@ footer a:hover { opacity: .4; }
   .about-text { order: 2; max-width: 100%; }
 
   /* ── Contact page ── */
-  .contact-layout { padding-bottom: 60px; }
+  .contact { padding: calc(var(--nav-h) + 32px) 20px calc(var(--footer-h) + 40px); }
+  .cform__row { grid-template-columns: 1fr; gap: 28px; }
 
   /* ── Impressum ── */
   .impressum-layout {
