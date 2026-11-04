@@ -49,7 +49,8 @@
       coverage: fd.get('coverage') || '',
       extras: fd.getAll('extras').join(', '),
       message: fd.get('message') || '',
-      how_found: fd.get('how_found') || ''
+      how_found: fd.get('how_found') || '',
+      privacy_policy_accepted: 'yes'
     };
 
     sendBtn.disabled = true;

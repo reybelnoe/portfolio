@@ -1,4 +1,4 @@
-/* Selector de idioma (home, about y contact): EN (por defecto) ↔ ES.
+/* Selector de idioma (home, about, contact, aviso legal y privacidad): EN (por defecto) ↔ ES.
    - Los textos con data-i18n="clave" y los alt con data-i18n-alt="clave"
      se sustituyen por su traducción; el original en inglés se guarda para volver.
    - El título principal (h1 "Wedding photographer") no lleva data-i18n: no se traduce.
@@ -10,7 +10,44 @@
 
     'nav.about': 'sobre mí',
     'nav.contact': 'contacto',
-    'footer.impressum': 'aviso legal',
+    'footer.legal': 'aviso legal',
+    'footer.privacy': 'privacidad',
+
+    'legal.title': 'Noemí Rey — Aviso legal',
+    'legal.h1': 'Aviso legal',
+    'legal.owner': 'Titular del sitio web',
+    'legal.name': 'Nombre:',
+    'legal.address': 'Dirección:',
+    'legal.addressValue': "Puig d'en Valls, Santa Eulalia des Riu, Ibiza, Islas Baleares, España",
+    'legal.email': 'Correo electrónico:',
+    'legal.activity': 'Actividad:',
+    'legal.activityValue': 'Fotografía de bodas',
+    'legal.useH': 'Objeto y condiciones de uso',
+    'legal.useP': 'Este sitio web presenta el trabajo fotográfico de Noemí Rey y permite a las personas que lo visitan consultar por sus servicios. Su uso implica la aceptación de estas condiciones. La titular puede modificar el contenido del sitio o estas condiciones en cualquier momento.',
+    'legal.ipH': 'Propiedad intelectual',
+    'legal.ipP': 'Las fotografías, los textos y el diseño de este sitio web están protegidos por la legislación de propiedad intelectual y son © Noemí Rey. No pueden reproducirse, distribuirse, modificarse ni usarse con fines comerciales sin autorización previa y por escrito.',
+    'legal.liabH': 'Responsabilidad',
+    'legal.liabP': 'El contenido se ofrece solo con fines informativos. La titular no garantiza que el sitio esté siempre disponible ni libre de errores, y no se responsabiliza de los daños derivados de su uso ni de los enlaces a sitios web externos.',
+    'legal.lawH': 'Legislación aplicable',
+    'legal.lawP': 'Estas condiciones se rigen por la legislación española. Cualquier controversia se resolverá ante los juzgados y tribunales competentes conforme a la ley aplicable.',
+    'legal.updated': 'Última actualización: 4 de noviembre de 2026',
+
+    'privacy.title': 'Noemí Rey — Política de privacidad',
+    'privacy.h1': 'Política de privacidad',
+    'privacy.controllerH': 'Responsable del tratamiento de tus datos',
+    'privacy.dataH': 'Qué datos recojo y para qué',
+    'privacy.dataP': 'Cuando usas el formulario de contacto recibo los datos que escribes: nombre, correo electrónico, fecha y lugar de la boda, la cobertura que te interesa, los servicios adicionales, tu mensaje y cómo me encontraste. Los uso únicamente para responder a tu consulta y, si decides contratarme, para preparar el servicio.',
+    'privacy.basisH': 'Base legal',
+    'privacy.basisP': 'Tu consentimiento, que das al marcar la casilla del formulario, y, en su caso, la aplicación de medidas precontractuales a petición tuya.',
+    'privacy.recipientsH': 'Quién recibe tus datos',
+    'privacy.recipientsP': 'El formulario se envía a través de Web3Forms, un proveedor de formularios, para que el mensaje llegue a mi correo. No vendo tus datos. Además de ese proveedor y de mi proveedor de correo, nadie más los recibe, salvo que la ley lo exija.',
+    'privacy.keepH': 'Cuánto tiempo los conservo',
+    'privacy.keepP': 'Mientras sean necesarios para atender tu consulta y, después, solo durante los plazos que exija la ley.',
+    'privacy.rightsH': 'Tus derechos',
+    'privacy.rightsP': 'Puedes solicitar el acceso, la rectificación, la supresión, la limitación, la oposición y la portabilidad de tus datos, y retirar tu consentimiento en cualquier momento, escribiendo a',
+    'privacy.complaintP': 'Si crees que no se han respetado tus derechos, puedes reclamar ante la Agencia Española de Protección de Datos:',
+    'privacy.cookiesH': 'Cookies y almacenamiento local',
+    'privacy.cookiesP': 'Esta web no utiliza cookies de seguimiento ni de publicidad. Solo guarda en tu navegador el idioma que eliges, para recordarlo. Esa información se queda en tu dispositivo.',
 
     'contact.name': 'Nombre',
     'contact.email': 'Correo electrónico',
@@ -31,6 +68,8 @@
     'contact.extra2': 'Brunch o fiesta en la piscina del día después',
     'contact.message': 'Mensaje',
     'contact.found': '¿Cómo me encontraste?',
+    'contact.consent': 'He leído y acepto la',
+    'contact.consentLink': 'política de privacidad',
     'contact.send': 'Enviar',
     'contact.sending': 'Enviando…',
     'contact.sent': 'Gracias, tu mensaje se ha enviado. Te responderé pronto.',

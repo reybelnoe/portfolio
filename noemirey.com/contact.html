@@ -111,6 +111,11 @@
         <input id="f-found" name="how_found" type="text">
       </div>
 
+      <label class="cform__check cform__check--small cform__consent">
+        <input type="checkbox" name="consent" required>
+        <span><span data-i18n="contact.consent">I have read and accept the</span> <a href="privacy.html" target="_blank" rel="noopener" data-i18n="contact.consentLink">privacy policy</a></span>
+      </label>
+
       <div class="cform__actions">
         <button type="submit" class="cform__send" data-i18n="contact.send">Send</button>
         <p class="cform__status" id="status-sending" role="status" hidden data-i18n="contact.sending">Sending…</p>
@@ -126,7 +131,10 @@
 
   <footer>
     <span>© 2026 Noemi Rey</span>
-    <a href="impressum.html" data-i18n="footer.impressum">impressum</a>
+    <span class="footer-links">
+      <a href="legal.html" data-i18n="footer.legal">legal notice</a>
+      <a href="privacy.html" data-i18n="footer.privacy">privacy</a>
+    </span>
   </footer>
 
   <script src="lang.js" defer></script>
