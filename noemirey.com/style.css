@@ -308,6 +308,8 @@ footer a:hover { opacity: .4; }
   scrollbar-width: none;
 }
 .wh-strip::-webkit-scrollbar { display: none; }
+.wh-strip-wrap { position: relative; }
+.wh-strip__arrow { display: none; }
 .wh-strip__item {
   flex: 0 0 auto;
   height: calc((100dvh - var(--nav-h) - var(--footer-h)) * 0.72);
@@ -705,11 +707,13 @@ footer a:hover { opacity: .4; }
   }
   .wh-moment__body { max-width: 100%; }
 
-  /* Strip: horizontal scroll */
+  /* Strip: carrusel horizontal; cada foto con su proporción natural y centrada
+     al deslizar. El relleno lateral (12,66vw) deja centradas la primera y la
+     última, que son horizontales 4:3 a 56vw de alto (= 74,67vw de ancho). */
   .wh-strip {
     min-height: 0;
     height: auto;
-    padding: 0;
+    padding: 0 12.66vw;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
@@ -722,10 +726,43 @@ footer a:hover { opacity: .4; }
   }
 
   .wh-strip__item {
-    flex: 0 0 85vw;
-    height: 56vw; /* 85vw at 4:3 ≈ 64vw, slightly taller crop */
-    scroll-snap-align: start;
+    flex: 0 0 auto;
+    height: 56vw;
+    scroll-snap-align: center;
   }
+
+  /* Flechas del carrusel (solo móvil): chevrones finos, blancos con sombra suave */
+  .wh-strip__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+    z-index: 2;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .wh-strip__arrow[hidden] { display: none; }
+  .wh-strip__arrow--prev { left: 0; }
+  .wh-strip__arrow--next { right: 0; }
+  .wh-strip__arrow svg {
+    width: 12px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 3px rgba(0, 0, 0, .55));
+  }
+  .wh-strip__arrow:focus-visible { outline: 1px solid #fff; outline-offset: -6px; }
 
   /* ── Project pages ── */
   .project-layout {

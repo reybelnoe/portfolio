@@ -49,6 +49,9 @@
     'privacy.cookiesH': 'Cookies y almacenamiento local',
     'privacy.cookiesP': 'Esta web no utiliza cookies de seguimiento ni de publicidad. Solo guarda en tu navegador el idioma que eliges, para recordarlo. Esa información se queda en tu dispositivo.',
 
+    'strip.prev': 'Foto anterior',
+    'strip.next': 'Foto siguiente',
+
     'contact.name': 'Nombre',
     'contact.email': 'Correo electrónico',
     'contact.date': 'Fecha de la boda',
@@ -116,6 +119,7 @@
 
   const textEls = document.querySelectorAll('[data-i18n]');
   const altEls = document.querySelectorAll('[data-i18n-alt]');
+  const ariaEls = document.querySelectorAll('[data-i18n-aria]');
   const metaDesc = document.querySelector('meta[name="description"]');
   /* Título y descripción solo se traducen en las páginas que tienen claves
      '<página>.title' / '<página>.description' (ahora solo la home). */
@@ -129,11 +133,13 @@
 
   textEls.forEach(el => { el.dataset.en = el.textContent; });
   altEls.forEach(el => { el.dataset.enAlt = el.getAttribute('alt'); });
+  ariaEls.forEach(el => { el.dataset.enAria = el.getAttribute('aria-label'); });
 
   function apply(lang) {
     const es = lang === 'es';
     textEls.forEach(el => { el.textContent = es ? ES[el.dataset.i18n] : el.dataset.en; });
     altEls.forEach(el => { el.setAttribute('alt', es ? ES[el.dataset.i18nAlt] : el.dataset.enAlt); });
+    ariaEls.forEach(el => { el.setAttribute('aria-label', es ? ES[el.dataset.i18nAria] : el.dataset.enAria); });
     document.documentElement.lang = es ? 'es' : 'en';
     if (esTitle) document.title = es ? esTitle : original.title;
     if (metaDesc && esDesc) metaDesc.setAttribute('content', es ? esDesc : original.description);

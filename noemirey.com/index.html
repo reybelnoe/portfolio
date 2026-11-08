@@ -139,6 +139,7 @@
     </section>
 
     <!-- STRIP -->
+    <div class="wh-strip-wrap">
     <div class="wh-strip">
       <div class="wh-strip__item">
         <img
@@ -213,6 +214,13 @@
           loading="lazy" width="2000" height="1500">
       </div>
     </div>
+      <button type="button" class="wh-strip__arrow wh-strip__arrow--prev" aria-label="Previous photo" data-i18n-aria="strip.prev" hidden>
+        <svg viewBox="0 0 12 22" aria-hidden="true" focusable="false"><path d="M11 1 1 11l10 10"/></svg>
+      </button>
+      <button type="button" class="wh-strip__arrow wh-strip__arrow--next" aria-label="Next photo" data-i18n-aria="strip.next">
+        <svg viewBox="0 0 12 22" aria-hidden="true" focusable="false"><path d="m1 1 10 10L1 21"/></svg>
+      </button>
+    </div>
 
   </main>
 
@@ -225,6 +233,7 @@
   </footer>
 
   <script src="gallery.js"></script>
+  <script src="carousel.js" defer></script>
   <script src="lang.js" defer></script>
 </body>
 </html>
