@@ -14,6 +14,20 @@
   <link rel="icon" href="assets/favicon.ico" sizes="48x48">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <script>
+    /* Si el idioma será español, oculta la página hasta que lang.js la traduzca
+       (evita el parpadeo del inglés). Misma regla que detect() en lang.js. */
+    (function () {
+      try {
+        var d = document.documentElement, saved = localStorage.getItem('noemirey-lang');
+        var l = String((navigator.languages && navigator.languages[0]) || navigator.language || '').toLowerCase();
+        if (saved === 'es' || (saved !== 'en' && (l === 'es' || l.indexOf('es-') === 0))) {
+          d.classList.add('i18n-pending');
+          setTimeout(function () { d.classList.remove('i18n-pending'); }, 2000);
+        }
+      } catch (e) {}
+    })();
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>

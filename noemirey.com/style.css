@@ -36,6 +36,9 @@ body.home { overflow: hidden; }
 
 a { color: inherit; text-decoration: none; }
 
+/* Mientras se traduce al español (idioma detectado) no se muestra el inglés un instante */
+html.i18n-pending body { visibility: hidden; }
+
 /* ─── Nav ─────────────────────────────────────────────────────────────────── */
 nav {
   position: fixed;

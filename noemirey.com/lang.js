@@ -151,8 +151,21 @@
   function read() { try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; } }
   function write(v) { try { localStorage.setItem(STORAGE_KEY, v); } catch (e) { /* sin almacenamiento */ } }
 
-  let current = read() === 'es' ? 'es' : 'en';
+  /* Idioma inicial: 1) la elección guardada al pulsar el botón; 2) si no hay,
+     el idioma principal del navegador: español si empieza por "es" (es, es-ES,
+     es-MX…), inglés para cualquier otro. Esta regla debe coincidir con la del
+     script en línea de la cabecera de cada página. */
+  function detect() {
+    const saved = read();
+    if (saved === 'es' || saved === 'en') return saved;
+    const langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+    const first = String(langs[0] || '').toLowerCase();
+    return first === 'es' || first.indexOf('es-') === 0 ? 'es' : 'en';
+  }
+
+  let current = detect();
   apply(current);
+  document.documentElement.classList.remove('i18n-pending');
 
   btn.addEventListener('click', () => {
     current = current === 'es' ? 'en' : 'es';
