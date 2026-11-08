@@ -644,6 +644,13 @@ footer a:hover { opacity: .4; }
   /* Hero: keep full-screen on mobile, allow photo to scale */
   .wh-hero { height: 100svh; }
   .wh-hero img { max-width: 80%; }
+  /* Título del hero (ajuste hecho en Design, 390 px): más grande, en dos líneas,
+     anclado a la foto (80vw de ancho × 4/3 de alto) y solapándola 35 px */
+  .wh-hero__title {
+    top: calc(var(--nav-h) + 106.7vw - 35px);
+    bottom: auto;
+    font-size: 58.75px;
+  }
 
   /* Intro / Based / CTA: auto height */
   .wh-intro,
@@ -708,6 +715,12 @@ footer a:hover { opacity: .4; }
     scroll-snap-type: x mandatory;
     gap: 4px;
   }
+  /* Pie de la home en móvil: al final de la página, no fijo encima de las fotos */
+  body.home footer {
+    position: static;
+    margin-top: 40px;
+  }
+
   .wh-strip__item {
     flex: 0 0 85vw;
     height: 56vw; /* 85vw at 4:3 ≈ 64vw, slightly taller crop */
