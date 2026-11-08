@@ -152,15 +152,16 @@
   function write(v) { try { localStorage.setItem(STORAGE_KEY, v); } catch (e) { /* sin almacenamiento */ } }
 
   /* Idioma inicial: 1) la elección guardada al pulsar el botón; 2) si no hay,
-     el idioma principal del navegador: español si empieza por "es" (es, es-ES,
-     es-MX…), inglés para cualquier otro. Esta regla debe coincidir con la del
-     script en línea de la cabecera de cada página. */
+     el idioma principal del navegador: español para es (es-ES, es-MX…) y para las
+     lenguas de España (catalán, gallego, euskera, aranés, asturiano, aragonés);
+     inglés para cualquier otro. Esta regla debe coincidir con la del script en
+     línea de la cabecera de cada página. */
+  const SPANISH_LANGS = /^(es|ca|gl|eu|oc|ast|an)(-|$)/;
   function detect() {
     const saved = read();
     if (saved === 'es' || saved === 'en') return saved;
     const langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
-    const first = String(langs[0] || '').toLowerCase();
-    return first === 'es' || first.indexOf('es-') === 0 ? 'es' : 'en';
+    return SPANISH_LANGS.test(String(langs[0] || '').toLowerCase()) ? 'es' : 'en';
   }
 
   let current = detect();

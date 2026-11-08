@@ -20,7 +20,7 @@
       try {
         var d = document.documentElement, saved = localStorage.getItem('noemirey-lang');
         var l = String((navigator.languages && navigator.languages[0]) || navigator.language || '').toLowerCase();
-        if (saved === 'es' || (saved !== 'en' && (l === 'es' || l.indexOf('es-') === 0))) {
+        if (saved === 'es' || (saved !== 'en' && /^(es|ca|gl|eu|oc|ast|an)(-|$)/.test(l))) {
           d.classList.add('i18n-pending');
           setTimeout(function () { d.classList.remove('i18n-pending'); }, 2000);
         }
